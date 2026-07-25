@@ -2537,7 +2537,7 @@ export default function Home() {
               <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
-            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-10">Bringing visions to life.</h2>
+            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-10">I bring visions to life.</h2>
             <p className="text-lg text-muted-foreground/70 font-light mb-10 max-w-xl mx-auto leading-relaxed">
               For inquiries or collaborations, add your preferred contact method below.
             </p>
