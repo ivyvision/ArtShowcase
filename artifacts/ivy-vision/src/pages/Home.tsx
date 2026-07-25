@@ -710,7 +710,7 @@ export default function Home() {
             className="flex items-center gap-4 mt-4"
           >
             <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-primary/50" />
-            <span className="font-mono text-[10px] tracking-[0.5em] text-primary/60 uppercase">obsidian & stars · the expansive divine</span>
+            <span className="font-mono text-[10px] tracking-[0.5em] text-primary/60 uppercase text-center">obsidian & stars<br/>the expansive divine</span>
             <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-primary/50" />
           </motion.div>
 
