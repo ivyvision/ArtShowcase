@@ -603,83 +603,89 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Oracle / Lore — lost archive plate */}
-      <Section className="z-10 bg-background overflow-hidden relative">
-        {/* Alchemical chart — left side watermark bleed */}
-        <div className="absolute left-0 top-0 h-full w-[40%] pointer-events-none z-0 opacity-15 mix-blend-luminosity">
+      {/* Oracle / Lore — cinematic wide frame */}
+      <section className="z-10 bg-background overflow-hidden relative py-20">
+        {/* Alchemical chart watermark — bleeds behind the frame */}
+        <div className="absolute left-0 top-0 h-full w-[30%] pointer-events-none z-0 opacity-10 mix-blend-luminosity">
           <img src={alchemicalChart} alt="" className="h-full w-full object-cover object-right" />
-          <div className="absolute inset-0 bg-gradient-to-l from-background via-background/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background" />
         </div>
-        {/* Metatron's Cube watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-          <MetatronsCube className="w-[700px] h-[700px] text-primary opacity-[0.04] sacred-glow" />
-        </div>
+        <MetatronsCube className="absolute inset-0 m-auto w-[600px] h-[600px] text-primary opacity-[0.03] sacred-glow pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="w-full px-4 md:px-10 relative z-10">
+          {/* Section label */}
+          <FadeIn>
+            <div className="flex items-center gap-4 mb-8 max-w-7xl mx-auto">
+              <div className="w-10 h-[1px] bg-primary/60" />
+              <span className="text-primary/80 font-mono tracking-[0.35em] uppercase text-xs">The Oracle</span>
+            </div>
+          </FadeIn>
 
-            {/* Archive plate portrait — tilted, aged */}
-            <FadeIn>
-              <div className="relative">
-                {/* Shadow plate beneath */}
-                <div className="absolute inset-0 translate-x-4 translate-y-5 bg-black/50 rounded-sm" />
-                <div className="relative archive-frame" style={{ transform: "rotate(-2deg)" }}>
-                  <img src={profileBg} alt="Oracle" className="w-full aspect-[3/4] object-cover object-top rounded-sm" />
-                  {/* Warm sepia grade */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(22_55%_5%)] via-transparent to-transparent rounded-sm" />
-                  {/* Gold frame border */}
-                  <div className="absolute inset-0 border border-primary/30 rounded-sm pointer-events-none" />
-                  {/* Archive label */}
-                  <div className="absolute bottom-6 left-6">
-                    <div className="font-mono text-[10px] tracking-[0.4em] text-primary/70 uppercase">Oracle Archives · Vol. I</div>
-                  </div>
-                  {/* Corner geometry marks */}
-                  {[["top-2 left-2","border-t border-l"],["top-2 right-2","border-t border-r"],["bottom-2 left-2","border-b border-l"],["bottom-2 right-2","border-b border-r"]].map(([pos,border],i) => (
-                    <div key={i} className={`absolute ${pos} w-4 h-4 border-primary/50 ${border}`} />
-                  ))}
+          {/* ── CINEMATIC FRAME ── */}
+          <FadeIn delay={0.1}>
+            <div className="relative w-full archive-frame" style={{ aspectRatio: "21/9" }}>
+              {/* Shadow plate */}
+              <div className="absolute inset-0 translate-x-3 translate-y-4 bg-black/70 pointer-events-none" />
+
+              {/* Photo — object-contain so the FULL image is visible */}
+              <div className="relative w-full h-full bg-[hsl(22_55%_4%)] overflow-hidden border border-primary/25">
+                <img
+                  src={profileBg}
+                  alt="Oracle — golden hour desert"
+                  className="w-full h-full object-contain"
+                  style={{ objectPosition: "center" }}
+                />
+
+                {/* Cinematic sepia grade */}
+                <div className="absolute inset-0 bg-[hsl(28_60%_12%/0.3)] mix-blend-multiply pointer-events-none" />
+                {/* Side fades so it melts into page */}
+                <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+                {/* Bottom fade */}
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
+
+                {/* Corner registration marks */}
+                {([["top-3 left-3","border-t border-l"],["top-3 right-3","border-t border-r"],["bottom-3 left-3","border-b border-l"],["bottom-3 right-3","border-b border-r"]] as const).map(([pos, border], i) => (
+                  <div key={i} className={`absolute ${pos} w-5 h-5 border-primary/60 ${border} pointer-events-none`} />
+                ))}
+
+                {/* Archive label — bottom left */}
+                <div className="absolute bottom-4 left-5 pointer-events-none">
+                  <div className="font-mono text-[10px] tracking-[0.45em] text-primary/60 uppercase">Oracle Archives · Vol. I</div>
                 </div>
-                {/* Vesica Piscis ornament below */}
-                <VesicaPiscis className="w-32 text-primary/20 mx-auto mt-4 sacred-glow" />
+
+                {/* Quote overlaid bottom right */}
+                <div className="absolute bottom-4 right-5 text-right pointer-events-none max-w-sm">
+                  <p className="font-serif text-lg md:text-xl text-foreground/80 italic leading-snug"
+                    style={{ textShadow: "0 2px 20px rgba(0,0,0,0.9)" }}>
+                    "Held in place by the expansive divine."
+                  </p>
+                  <p className="font-mono text-[9px] tracking-widest text-primary/40 uppercase mt-1">Starlight — Estranged</p>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Text below the frame */}
+          <div className="max-w-4xl mx-auto mt-14 px-2">
+            <FadeIn delay={0.2}>
+              <h2 className="text-4xl md:text-6xl font-serif text-glow mb-8 leading-[0.95]">
+                I become a silhouette<br className="hidden md:block"/>& join the skyline.
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-4 text-base text-muted-foreground/80 font-light leading-relaxed border-l border-primary/20 pl-6">
+                  <p>As snow absorbs the ashes, awakened conscience falters. Underneath, true nature waits — exposed to air, ice melts away.</p>
+                  <p>Night brings heavy mist. Obstructing senses, but bearing perfect foresight. Clarity to the mind's eye.</p>
+                </div>
+                <div className="flex items-start gap-4 pl-6 md:pl-0">
+                  <SacredEye className="w-12 h-12 text-primary/35 sacred-glow flex-shrink-0 mt-1" />
+                  <VesicaPiscis className="w-40 text-primary/15 sacred-glow self-center" />
+                </div>
               </div>
             </FadeIn>
-
-            {/* Text */}
-            <div>
-              <FadeIn>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-10 h-[1px] bg-primary/60" />
-                  <span className="text-primary/80 font-mono tracking-[0.35em] uppercase text-xs">The Oracle</span>
-                </div>
-                <h2 className="text-5xl md:text-6xl font-serif text-glow mb-8 leading-[0.9]">
-                  I become<br/>a silhouette<br/>& join the skyline.
-                </h2>
-              </FadeIn>
-
-              <FadeIn delay={0.2}>
-                <div className="space-y-6 text-base text-muted-foreground/80 font-light leading-relaxed border-l border-primary/20 pl-6">
-                  <p>
-                    As snow absorbs the ashes, awakened conscience falters. Underneath, true nature waits — exposed to air, ice melts away.
-                  </p>
-                  <p>
-                    Night brings heavy mist. Obstructing senses, but bearing perfect foresight. Clarity to the mind's eye.
-                  </p>
-                </div>
-              </FadeIn>
-
-              <FadeIn delay={0.4}>
-                <div className="mt-10 flex items-center gap-3">
-                  <SacredEye className="w-10 h-10 text-primary/40 sacred-glow" />
-                  <div>
-                    <div className="font-mono text-[10px] tracking-widest text-primary/50 uppercase">Starlight</div>
-                    <div className="font-serif text-sm text-muted-foreground/60 italic mt-0.5">"Held in place by the expansive divine."</div>
-                  </div>
-                </div>
-              </FadeIn>
-            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* Poetry Centerpiece — "Reaper" excerpt */}
       <Section className="z-10 py-32 relative overflow-hidden bg-background">
