@@ -741,7 +741,7 @@ export default function Home() {
           
           <FadeIn>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif text-glow mb-8 leading-tight">
-              Into the night,<br className="hidden md:block"/>
+              Into the night, <br className="hidden md:block"/>
               immersed in space{" "}<br className="hidden md:block"/>
               & removed from time.
             </h2>
