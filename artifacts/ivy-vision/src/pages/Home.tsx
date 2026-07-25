@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import ivyLogo from "@assets/Untitled_design_1784941575772.jpeg";
 import duskPhoto from "@assets/IMG_8613_1784944861332.jpeg";
-import heroBg from "../assets/hero-bg.jpg";
-import loreBg from "../assets/lore.jpg";
-import musicBg from "../assets/music.jpg";
-import connectBg from "../assets/connect.jpg";
+import heroBg from "@assets/IMG_20260623_193409_10_186_1784945099904.jpeg";
+import loreBg from "@assets/1_IMG_5010_1784945745561.jpeg";
+import musicBg from "@assets/0_IMG_8612_1784945745560.jpeg";
+import connectBg from "@assets/IMG_8613_1784944861332.jpeg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
