@@ -2191,6 +2191,65 @@ const PoetryScrollSection = () => (
   </section>
 );
 
+type ContactMethod = 'email' | 'phone' | 'instagram';
+
+const ConnectForm = () => {
+  const [method, setMethod] = useState<ContactMethod>('email');
+  const [value, setValue] = useState('');
+
+  const methods: { id: ContactMethod; label: string; placeholder: string; type: string; prefix?: string }[] = [
+    { id: 'email',     label: 'Email',       type: 'email', placeholder: 'your@email.here' },
+    { id: 'phone',     label: 'Phone',        type: 'tel',   placeholder: '+1 (000) 000-0000' },
+    { id: 'instagram', label: 'Instagram @',  type: 'text',  placeholder: 'yourhandle', prefix: '@' },
+  ];
+
+  const active = methods.find(m => m.id === method)!;
+
+  return (
+    <div className="max-w-md mx-auto mb-14">
+      {/* Method selector pills */}
+      <div className="flex gap-2 mb-4 justify-center">
+        {methods.map(m => (
+          <button
+            key={m.id}
+            onClick={() => { setMethod(m.id); setValue(''); }}
+            className={`font-mono text-[11px] tracking-[0.2em] uppercase px-4 py-2 border transition-all duration-300 ${
+              method === m.id
+                ? 'border-primary/60 bg-primary/12 text-primary'
+                : 'border-white/10 text-muted-foreground/50 hover:border-primary/30 hover:text-muted-foreground'
+            }`}
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Input row */}
+      <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
+        <div className="flex flex-1 bg-[hsl(22_50%_8%/0.8)] border border-primary/20 focus-within:border-primary/60 transition-all">
+          {active.prefix && (
+            <span className="flex items-center pl-4 font-mono text-sm text-primary/50 select-none">{active.prefix}</span>
+          )}
+          <input
+            key={method}
+            type={active.type}
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            placeholder={active.placeholder}
+            className="flex-1 bg-transparent px-4 py-4 text-foreground placeholder:text-muted-foreground/35 focus:outline-none font-mono text-sm"
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-primary text-background font-mono font-bold tracking-[0.2em] uppercase px-6 py-4 hover:bg-primary/80 transition-colors hover:shadow-[0_0_24px_hsl(43_72%_48%/0.4)] whitespace-nowrap"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+  );
+};
+
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
@@ -2478,21 +2537,12 @@ export default function Home() {
               <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
-            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-10">At peace within the embrace of the sky.</h2>
-            <p className="text-lg text-muted-foreground/70 font-light mb-12 max-w-xl mx-auto leading-relaxed">
-              It's true that nothing lasts forever. But some things are worth trying to hold onto.
+            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-10">Bringing visions to life.</h2>
+            <p className="text-lg text-muted-foreground/70 font-light mb-10 max-w-xl mx-auto leading-relaxed">
+              For inquiries or collaborations, add your preferred contact method below.
             </p>
 
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-14" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="your@sanctuary.here"
-                className="flex-1 bg-[hsl(22_50%_8%/0.8)] border border-primary/20 rounded-none px-6 py-4 text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/60 transition-all font-mono text-sm"
-              />
-              <button className="bg-primary text-background font-mono font-bold tracking-[0.2em] uppercase px-8 py-4 rounded-none hover:bg-primary/80 transition-colors hover:shadow-[0_0_24px_hsl(43_72%_48%/0.4)]">
-                Hold onto
-              </button>
-            </form>
+            <ConnectForm />
 
             {/* Ornamental divider */}
             <div className="flex items-center gap-3 justify-center mb-8">
