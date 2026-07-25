@@ -1,6 +1,6 @@
-# [Project name]
+# IvyVision
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Immersive single-page portal for IvyVision — dark poetess, musician, and philosopher. Features real poetry from *Estranged* by Aiyana Noelani, mermaid-after-dusk color palette, and solarpunk / trippy-urban aesthetic.
 
 ## Run & Operate
 

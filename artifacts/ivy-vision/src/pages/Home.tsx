@@ -1,13 +1,95 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import ivyLogo from "@assets/Untitled_design_1784941575772.jpeg";
-// Note: Assuming generated images are available in src/assets
 import heroBg from "../assets/hero-bg.jpg";
 import loreBg from "../assets/lore.jpg";
 import musicBg from "../assets/music.jpg";
 import connectBg from "../assets/connect.jpg";
 
-import { Play, Pause, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube } from 'lucide-react';
+import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
+
+// Real poems from "Estranged" by Aiyana Noelani
+const POEMS = [
+  {
+    title: "Starlight",
+    lines: [
+      "Into the night",
+      "Immersed in space & removed from time",
+      "Held breath",
+      "Tranquil sigh",
+      "Glimpse of obsidian & stars shimmering white",
+      "Held in place by the expansive divine",
+      "At peace within the",
+      "Embrace of the sky",
+    ],
+  },
+  {
+    title: "Wholeness",
+    lines: [
+      "The trees forget their individuality",
+      "And join with the horizon into a single organism,",
+      "Drawing millions of breaths as one",
+      "With the power to pull the wind out of the valley",
+      "And the air out of my sun-gold body",
+      "Until it is impossible to hold on to the Self",
+      "So I become a silhouette",
+      "And join the trees in the skyline",
+    ],
+  },
+  {
+    title: "Landscape",
+    lines: [
+      "As snow absorbs the ashes, awakened conscience falters",
+      "Underneath, true nature waits",
+      "Exposed to air, ice melts away",
+      "",
+      "Growing forest to reclaim,",
+      "Where you can live with your pain",
+    ],
+  },
+  {
+    title: "Reaper",
+    excerpt: true,
+    lines: [
+      "Clenched in the gnarled fingers of the trees",
+      "Bound upon a bed of thistled vines",
+      "Looking up to watch the sunblaze stifle",
+      "Looking up to watch the night leak from black branches",
+      "The leafless lifeless reapers, desperate to absorb life",
+      "I am a sacrifice to these hallows",
+      "I am the compost they will drink",
+      "",
+      "Night brings heavy mist",
+      "As sclera seeping over the pupil",
+      "Obstructing senses, but bearing perfect foresight",
+      "Clarity to the mind's eye",
+      "Awaiting the descent",
+    ],
+  },
+  {
+    title: "Indifference",
+    lines: [
+      "You should be begging at my feet for forgiveness",
+      "for what you said",
+      "",
+      "Your indifference to me reared its ugly head",
+      "And now that I've seen it, I can't unsee it",
+      "",
+      "So I'm revoking your privilege to witness my life",
+      "",
+      "As I forge my way forward,",
+      "resilient and remarkable",
+    ],
+  },
+  {
+    title: "Nothing Lasts Forever",
+    lines: [
+      "It's true that nothing lasts forever",
+      "But some things are worth",
+      "Trying to hold onto",
+    ],
+  },
+];
 
 const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
   const ref = useRef(null);
@@ -46,6 +128,101 @@ const VineDecoration = ({ className = "" }: { className?: string }) => (
     <path d="M50 250 Q 30 240 20 260" stroke="currentColor" strokeWidth="1.5" fill="none" />
   </svg>
 );
+
+const PoetryArchive = () => {
+  const [active, setActive] = useState(0);
+  const poem = POEMS[active];
+
+  return (
+    <section className="relative z-10 py-24 bg-background overflow-hidden">
+      <VineDecoration className="top-0 right-0 h-full w-24 text-primary opacity-10" />
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
+        <FadeIn>
+          <div className="flex items-center gap-4 mb-12">
+            <BookOpen className="w-5 h-5 text-primary" />
+            <span className="font-mono text-primary text-sm uppercase tracking-widest">Estranged — Poetry Archive</span>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-primary/30 to-transparent" />
+          </div>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 items-start">
+          {/* Poem selector */}
+          <FadeIn>
+            <nav className="flex flex-col gap-1" aria-label="Poem list">
+              {POEMS.map((p, i) => (
+                <button
+                  key={i}
+                  data-testid={`poem-tab-${i}`}
+                  onClick={() => setActive(i)}
+                  className={`text-left px-5 py-4 rounded-xl font-serif text-lg transition-all duration-300 ${
+                    active === i
+                      ? 'bg-primary/10 border border-primary/30 text-primary text-glow'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-white/5 border border-transparent'
+                  }`}
+                >
+                  {p.title}
+                  {p.excerpt && (
+                    <span className="block font-mono text-[10px] tracking-widest uppercase mt-1 opacity-50">excerpt</span>
+                  )}
+                </button>
+              ))}
+            </nav>
+          </FadeIn>
+
+          {/* Poem display */}
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-panel rounded-2xl p-10 md:p-14 relative overflow-hidden min-h-[340px]"
+            data-testid="poem-display"
+          >
+            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+            <h3 className="font-serif text-3xl md:text-4xl text-glow mb-10">{poem.title}</h3>
+            <div className="space-y-1">
+              {poem.lines.map((line, i) =>
+                line === '' ? (
+                  <div key={i} className="h-5" />
+                ) : (
+                  <p key={i} className="font-serif text-lg md:text-xl text-foreground/85 leading-relaxed">
+                    {line}
+                  </p>
+                )
+              )}
+            </div>
+            {poem.excerpt && (
+              <p className="font-mono text-xs text-muted-foreground/40 uppercase tracking-widest mt-10">— excerpt</p>
+            )}
+            <p className="font-mono text-xs text-primary/30 uppercase tracking-widest mt-2">
+              Aiyana Noelani — <em>Estranged</em>
+            </p>
+
+            {/* Navigation arrows */}
+            <div className="flex gap-3 mt-10">
+              <button
+                data-testid="poem-prev"
+                onClick={() => setActive((a) => (a - 1 + POEMS.length) % POEMS.length)}
+                className="p-3 rounded-full border border-white/10 hover:border-primary/40 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
+                aria-label="Previous poem"
+              >
+                <Rewind className="w-4 h-4" />
+              </button>
+              <button
+                data-testid="poem-next"
+                onClick={() => setActive((a) => (a + 1) % POEMS.length)}
+                className="p-3 rounded-full border border-white/10 hover:border-primary/40 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
+                aria-label="Next poem"
+              >
+                <FastForward className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -119,7 +296,11 @@ export default function Home() {
               <div className="flex-1 w-full glass-panel p-8 rounded-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <h3 className="font-mono text-primary text-sm uppercase tracking-widest mb-4">Latest Transmission</h3>
-                <p className="font-serif text-2xl italic text-foreground/90">"Neon bleeding into the tide, we are the ghosts of a drowned city learning to breathe water."</p>
+                <p className="font-serif text-2xl italic text-foreground/90 leading-relaxed">
+                  "So I'm revoking your privilege to witness my life —
+                  as I forge my way forward, resilient and remarkable."
+                </p>
+                <p className="font-mono text-xs text-primary/40 uppercase tracking-widest mt-6">— Indifference, <em>Estranged</em></p>
               </div>
             </div>
           </FadeIn>
@@ -172,27 +353,29 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Poetry */}
+      {/* Poetry Centerpiece — "Reaper" excerpt */}
       <Section className="z-10 py-32 relative overflow-hidden bg-background">
         <VineDecoration className="top-20 left-10 h-[600px] w-48 text-secondary" />
         <VineDecoration className="bottom-20 right-10 h-[600px] w-48 text-secondary rotate-180" />
-        
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
-        
         <div className="max-w-4xl mx-auto px-6 text-center relative z-20">
           <FadeIn>
             <Radio className="w-8 h-8 text-secondary mx-auto mb-8 opacity-50" />
-            <h3 className="font-sans text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter leading-[0.8] mb-12 text-transparent bg-clip-text bg-gradient-to-br from-white via-primary to-secondary drop-shadow-[0_0_15px_rgba(0,229,209,0.3)] rotate-[-2deg] skew-x-[-5deg]">
-              <span className="opacity-50 text-3xl align-top block mb-4 tracking-widest font-serif lowercase italic text-white/50 drop-shadow-none rotate-[2deg] skew-x-[5deg]">"</span>
-              We traded the moon for neon,<br/>
-              and wonder why the tides<br/>
-              no longer answer to us.
-              <span className="opacity-50 text-3xl align-bottom block mt-4 tracking-widest font-serif lowercase italic text-white/50 drop-shadow-none rotate-[2deg] skew-x-[5deg]">"</span>
+            <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-snug mb-12 text-transparent bg-clip-text bg-gradient-to-br from-white via-primary to-secondary drop-shadow-[0_0_15px_rgba(0,229,209,0.3)] italic">
+              <span className="not-italic opacity-40 text-3xl block mb-6 font-mono tracking-widest lowercase text-white/40 drop-shadow-none">"</span>
+              Clenched in the gnarled fingers of the trees,<br/>
+              bound upon a bed of thistled vines —<br/>
+              I am a sacrifice to these hallows,<br/>
+              I am the compost they will drink.
+              <span className="not-italic opacity-40 text-3xl block mt-6 font-mono tracking-widest lowercase text-white/40 drop-shadow-none">"</span>
             </h3>
-            <p className="font-mono text-sm tracking-[0.4em] text-secondary uppercase bg-black/50 inline-block px-4 py-2 border border-secondary/20">Excerpt from 'Concrete Tides'</p>
+            <p className="font-mono text-sm tracking-[0.4em] text-secondary uppercase bg-black/50 inline-block px-4 py-2 border border-secondary/20">Reaper — <em>Estranged</em></p>
           </FadeIn>
         </div>
       </Section>
+
+      {/* Poetry Archive */}
+      <PoetryArchive />
 
       {/* Music / Discography */}
       <Section className="z-10 relative bg-background/50 backdrop-blur-3xl border-y border-white/5 py-32">
