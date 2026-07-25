@@ -499,10 +499,10 @@ const PoetryArchive = () => {
 
 /* ── Poetry Scroll — one panel per photo ── */
 const PoetryPanel = ({
-  img, alt, align, lines, source, focal = "center",
+  img, alt, align, lines, source, focal = "center", valign = "center",
 }: {
   img: string; alt: string; align: "left" | "center" | "right";
-  lines: string[]; source: string; focal?: string;
+  lines: string[]; source: string; focal?: string; valign?: "top" | "center" | "bottom";
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -515,6 +515,8 @@ const PoetryPanel = ({
     : align === "right"
     ? "items-end text-right pr-8 md:pr-24"
     : "items-center text-center";
+
+  const justifyClass = valign === "top" ? "justify-start pt-16" : valign === "bottom" ? "justify-end pb-16" : "justify-center";
 
   return (
     <div ref={ref} className="relative w-full h-screen overflow-hidden">
@@ -533,7 +535,7 @@ const PoetryPanel = ({
       {/* Poem text — drifts opposite to photo */}
       <motion.div
         style={{ opacity, y: textY }}
-        className={`absolute inset-0 z-20 flex flex-col justify-center gap-4 px-4 ${alignClass}`}
+        className={`absolute inset-0 z-20 flex flex-col ${justifyClass} gap-4 px-4 ${alignClass}`}
       >
         {/* Source label */}
         <span className="font-mono text-[10px] tracking-[0.5em] text-primary/40 uppercase mb-2">{source}</span>
@@ -572,7 +574,7 @@ const PoetryPanel = ({
 const PoetryScrollSection = () => (
   <section className="z-10 relative">
     <PoetryPanel
-      img={loreBg}      alt="Night — red dress"   align="left"   focal="center top"
+      img={loreBg}      alt="Night — red dress"   align="left"   focal="center top" valign="top"
       source="Reaper · Estranged"
       lines={[
         "Looking up to watch",
