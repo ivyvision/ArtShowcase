@@ -514,7 +514,6 @@ const CHAPTERS = [
       },
       {
         title: "Reaper",
-        excerpt: true,
         lines: [
           "Clenched in the gnarled fingers of the trees",
           "Bound upon a bed of thistled vines",
