@@ -266,8 +266,9 @@ const DuskDivider = () => {
           className="font-serif text-2xl md:text-3xl text-white/90 max-w-xl leading-relaxed drop-shadow-[0_2px_24px_rgba(0,0,0,0.9)]"
           style={{ textShadow: "0 0 40px hsl(25 90% 48% / 0.35), 0 2px 8px rgba(0,0,0,0.8)" }}
         >
-          "Nothing lasts forever,<br />
-          <span style={{ color: "hsl(25 90% 65%)" }}>not even the dark."</span>
+          "It's true that nothing lasts forever —<br />
+          but some things are worth{" "}
+          <span style={{ color: "hsl(25 90% 65%)" }}>trying to hold onto."</span>
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -540,7 +541,7 @@ export default function Home() {
             className="flex items-center gap-4 mt-4"
           >
             <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-primary/50" />
-            <span className="font-mono text-[10px] tracking-[0.5em] text-primary/60 uppercase">Ancient · Gnostic · Untamed</span>
+            <span className="font-mono text-[10px] tracking-[0.5em] text-primary/60 uppercase">sun-gold body · obsidian & stars · the expansive divine</span>
             <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-primary/50" />
           </motion.div>
 
@@ -550,7 +551,7 @@ export default function Home() {
             transition={{ delay: 1.8, duration: 1 }}
             className="absolute bottom-12 flex flex-col items-center gap-4 text-primary/60"
           >
-            <span className="text-[10px] uppercase tracking-[0.4em] font-mono">Descend</span>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-mono">Awaiting the descent</span>
             <div className="w-[1px] h-16 bg-gradient-to-b from-primary/50 to-transparent" />
           </motion.div>
         </div>
@@ -565,16 +566,16 @@ export default function Home() {
           
           <FadeIn>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif text-glow mb-8 leading-tight">
-              Between the last ember <br className="hidden md:block"/>
-              of sunset & the depth <br className="hidden md:block"/>
-              of midnight.
+              Into the night,<br className="hidden md:block"/>
+              immersed in space<br className="hidden md:block"/>
+              & removed from time.
             </h2>
           </FadeIn>
           
           <FadeIn delay={0.2}>
             <div className="flex flex-col md:flex-row gap-12 items-start mt-12">
               <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-xl">
-                I am IvyVision. A voice from the undertow. Where urban concrete cracks and bleeds bioluminescent light. This is my digital sanctuary—a space for dark poetry, solarpunk visions, and frequencies drawn from the harbor's floor.
+                The trees forget their individuality and join with the horizon into a single organism, drawing millions of breaths as one — with the power to pull the wind out of the valley, and the air out of my sun-gold body.
               </p>
               
               <div className="flex-1 w-full glass-panel p-8 rounded-2xl relative overflow-hidden group">
@@ -634,17 +635,17 @@ export default function Home() {
                   <span className="text-primary/80 font-mono tracking-[0.35em] uppercase text-xs">The Oracle</span>
                 </div>
                 <h2 className="text-5xl md:text-6xl font-serif text-glow mb-8 leading-[0.9]">
-                  Ancient<br/>Gypsy<br/>Sage.
+                  I become<br/>a silhouette<br/>& join the skyline.
                 </h2>
               </FadeIn>
 
               <FadeIn delay={0.2}>
                 <div className="space-y-6 text-base text-muted-foreground/80 font-light leading-relaxed border-l border-primary/20 pl-6">
                   <p>
-                    She walks where the old maps end. Keeper of forgotten dialects, translator of wind and stone. Her art is a palimpsest — ancient scripture beneath modern ink, each layer revealing what was never truly buried.
+                    As snow absorbs the ashes, awakened conscience falters. Underneath, true nature waits — exposed to air, ice melts away.
                   </p>
                   <p>
-                    The desert remembers every footprint. The forest holds every whisper. She is both archive and archivist — the one who was there and the one who writes it down.
+                    Night brings heavy mist. Obstructing senses, but bearing perfect foresight. Clarity to the mind's eye.
                   </p>
                 </div>
               </FadeIn>
@@ -653,8 +654,8 @@ export default function Home() {
                 <div className="mt-10 flex items-center gap-3">
                   <SacredEye className="w-10 h-10 text-primary/40 sacred-glow" />
                   <div>
-                    <div className="font-mono text-[10px] tracking-widest text-primary/50 uppercase">Gnosis</div>
-                    <div className="font-serif text-sm text-muted-foreground/60 italic mt-0.5">"Know thyself, and thou shalt know the universe."</div>
+                    <div className="font-mono text-[10px] tracking-widest text-primary/50 uppercase">Starlight</div>
+                    <div className="font-serif text-sm text-muted-foreground/60 italic mt-0.5">"Held in place by the expansive divine."</div>
                   </div>
                 </div>
               </FadeIn>
@@ -713,10 +714,10 @@ export default function Home() {
           {/* Overlapping vintage photo spread */}
           <div className="relative flex flex-wrap justify-center gap-6 md:gap-0 md:block min-h-[600px]">
             {[
-              { img: heroBg,    label: "Desert Sage",       sub: "Plate I",   rot: "-2deg",  pos: "md:absolute md:top-0 md:left-[5%]   md:w-[38%]" },
-              { img: loreBg,    label: "Smoke Oracle",      sub: "Plate II",  rot: "1.5deg", pos: "md:absolute md:top-16 md:left-[30%] md:w-[32%]" },
-              { img: profileBg, label: "The Wanderer",      sub: "Plate III", rot: "-1deg",  pos: "md:absolute md:top-8  md:right-[5%] md:w-[36%]" },
-              { img: musicBg,   label: "Dried Rose",        sub: "Plate IV",  rot: "2.5deg", pos: "md:absolute md:bottom-0 md:left-[18%] md:w-[28%]" },
+              { img: heroBg,    label: "Into the night",              sub: "Plate I",   rot: "-2deg",  pos: "md:absolute md:top-0 md:left-[5%]   md:w-[38%]" },
+              { img: loreBg,    label: "Looking up to watch the sunblaze stifle", sub: "Plate II",  rot: "1.5deg", pos: "md:absolute md:top-16 md:left-[30%] md:w-[32%]" },
+              { img: profileBg, label: "I become a silhouette",        sub: "Plate III", rot: "-1deg",  pos: "md:absolute md:top-8  md:right-[5%] md:w-[36%]" },
+              { img: musicBg,   label: "thistled vines",               sub: "Plate IV",  rot: "2.5deg", pos: "md:absolute md:bottom-0 md:left-[18%] md:w-[28%]" },
             ].map(({ img, label, sub, rot, pos }, i) => (
               <FadeIn key={i} delay={i * 0.15}>
                 <div className={`relative group cursor-crosshair ${pos}`} style={{ zIndex: i + 1 }}>
@@ -772,16 +773,16 @@ export default function Home() {
             {/* Decorative rule */}
             <div className="flex items-center gap-4 justify-center mb-8">
               <div className="h-[1px] w-20 bg-gradient-to-r from-transparent to-primary/50" />
-              <span className="font-mono text-[10px] tracking-[0.5em] text-primary/40 uppercase">Sacred Entrance</span>
+              <span className="font-mono text-[10px] tracking-[0.5em] text-primary/40 uppercase">true nature waits</span>
               <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
-            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-4">Enter the Sanctuary</h2>
+            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-4">At peace within the embrace of the sky.</h2>
             <p className="font-mono text-xs tracking-[0.4em] text-primary/40 uppercase mb-10">
-              ✦ Lost Archive · Open Gate ✦
+              ✦ nothing lasts forever · but some things are worth ✦
             </p>
             <p className="text-lg text-muted-foreground/70 font-light mb-12 max-w-xl mx-auto leading-relaxed">
-              Join the inner circle. Receive dispatches from the archive — secret tracks, poetry drops, and transmissions from the ancient edge.
+              It's true that nothing lasts forever. But some things are worth trying to hold onto.
             </p>
 
             <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-14" onSubmit={(e) => e.preventDefault()}>
@@ -791,7 +792,7 @@ export default function Home() {
                 className="flex-1 bg-[hsl(22_50%_8%/0.8)] border border-primary/20 rounded-none px-6 py-4 text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/60 transition-all font-mono text-sm"
               />
               <button className="bg-primary text-background font-mono font-bold tracking-[0.2em] uppercase px-8 py-4 rounded-none hover:bg-primary/80 transition-colors hover:shadow-[0_0_24px_hsl(43_72%_48%/0.4)]">
-                Initiate
+                Hold onto
               </button>
             </form>
 
@@ -819,7 +820,7 @@ export default function Home() {
 
         <div className="absolute bottom-6 left-0 w-full text-center">
           <p className="font-mono text-[10px] text-primary/20 uppercase tracking-[0.4em]">
-            © {new Date().getFullYear()} IvyVision · The Archive is Alive
+            © {new Date().getFullYear()} IvyVision · resilient and remarkable
           </p>
         </div>
       </Section>
