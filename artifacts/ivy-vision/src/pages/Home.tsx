@@ -13,6 +13,10 @@ import alchemicalChart from "@assets/generated_images/alchemical_chart.jpg";
 import descentThreshold from "@assets/generated_images/descent_threshold.jpg";
 import mementoMoriHands from "@assets/generated_images/memento_mori_hands.jpg";
 import oracleWideBg from "@assets/generated_images/oracle_wide_bg.jpg";
+// New relic photos
+import burningPoetry from "@assets/IMG_8639_1784953364358.jpeg";
+import desertFrontal from "@assets/IMG_7713_1784953364358.jpeg";
+import falseProphet from "@assets/Untitled_design_1784953364358.png";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
@@ -757,10 +761,10 @@ export default function Home() {
           {/* Overlapping vintage photo spread */}
           <div className="relative flex flex-wrap justify-center gap-6 md:gap-0 md:block min-h-[600px]">
             {[
-              { img: heroBg,    label: "Into the night",              sub: "Plate I",   rot: "-2deg",  pos: "md:absolute md:top-0 md:left-[5%]   md:w-[38%]" },
-              { img: loreBg,    label: "Looking up to watch the sunblaze stifle", sub: "Plate II",  rot: "1.5deg", pos: "md:absolute md:top-16 md:left-[30%] md:w-[32%]" },
-              { img: profileBg, label: "I become a silhouette",        sub: "Plate III", rot: "-1deg",  pos: "md:absolute md:top-8  md:right-[5%] md:w-[36%]" },
-              { img: musicBg,   label: "thistled vines",               sub: "Plate IV",  rot: "2.5deg", pos: "md:absolute md:bottom-0 md:left-[18%] md:w-[28%]" },
+              { img: loreBg,       label: "night leak from black branches",  sub: "Plate I",   rot: "0deg", pos: "md:absolute md:top-0 md:left-[5%]   md:w-[38%]" },
+              { img: desertFrontal,label: "sun-gold body",               sub: "Plate II",  rot: "0deg", pos: "md:absolute md:top-16 md:left-[30%] md:w-[32%]" },
+              { img: burningPoetry,label: "awakened conscience falters",  sub: "Plate III", rot: "0deg", pos: "md:absolute md:top-8  md:right-[5%] md:w-[36%]" },
+              { img: falseProphet, label: "revoking your privilege",      sub: "Plate IV",  rot: "0deg", pos: "md:absolute md:bottom-0 md:left-[18%] md:w-[28%]" },
             ].map(({ img, label, sub, rot, pos }, i) => (
               <FadeIn key={i} delay={i * 0.15}>
                 <div className={`relative group cursor-crosshair ${pos}`} style={{ zIndex: i + 1 }}>
