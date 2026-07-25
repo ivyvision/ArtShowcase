@@ -2554,7 +2554,7 @@ export default function Home() {
             <div className="flex items-center justify-center gap-6">
               {[
                 { Icon: Instagram, href: "https://instagram.com/ivy.coconuts" },
-                { Icon: Mail,      href: "mailto:ivyvision@gmail.com" },
+                { Icon: Mail,      href: "mailto:visionaryivy@gmail.com" },
                 { Icon: Youtube,   href: "#" },
               ].map(({ Icon, href }, i) => (
                 <a key={i} href={href} target="_blank" rel="noopener noreferrer"
