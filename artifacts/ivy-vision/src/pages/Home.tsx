@@ -17,6 +17,9 @@ import oracleWideBg from "@assets/generated_images/oracle_wide_bg.jpg";
 import burningPoetry from "@assets/IMG_8639_1784953364358.jpeg";
 import desertFrontal from "@assets/IMG_7713_1784953364358.jpeg";
 import falseProphet from "@assets/Untitled_design_1784953364358.png";
+import aboveClouds from "@assets/IMG_8654_1784957576757.jpeg";
+import gothicArch from "@assets/IMG_8649_1784957576757.jpeg";
+import darkFlower from "@assets/IMG_8659_1784957576757.jpeg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
@@ -758,23 +761,23 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          {/* Overlapping vintage photo spread */}
-          <div className="relative flex flex-wrap justify-center gap-6 md:gap-0 md:block min-h-[600px]">
-            {[
-              { img: loreBg,       label: "night leak from black branches",  sub: "Plate I",   rot: "0deg", pos: "md:absolute md:top-0 md:left-[5%]   md:w-[38%]" },
-              { img: desertFrontal,label: "sun-gold body",               sub: "Plate II",  rot: "0deg", pos: "md:absolute md:top-16 md:left-[30%] md:w-[32%]" },
-              { img: burningPoetry,label: "awakened conscience falters",  sub: "Plate III", rot: "0deg", pos: "md:absolute md:top-8  md:right-[5%] md:w-[36%]" },
-              { img: falseProphet, label: "revoking your privilege",      sub: "Plate IV",  rot: "0deg", pos: "md:absolute md:bottom-0 md:left-[18%] md:w-[28%]" },
-            ].map(({ img, label, sub, rot, pos }, i) => (
-              <FadeIn key={i} delay={i * 0.15}>
-                <div className={`relative group cursor-crosshair ${pos}`} style={{ zIndex: i + 1 }}>
+          {/* 7-plate archive grid — 3 cols, some spanning 2 for variety */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+            {([
+              { img: loreBg,       label: "night leak from black branches", sub: "Plate I",   span: "" },
+              { img: desertFrontal,label: "sun-gold body",                  sub: "Plate II",  span: "col-span-2 md:col-span-2" },
+              { img: burningPoetry,label: "awakened conscience falters",    sub: "Plate III", span: "" },
+              { img: gothicArch,   label: "I become a silhouette",          sub: "Plate IV",  span: "col-span-2 md:col-span-2" },
+              { img: falseProphet, label: "revoking your privilege",        sub: "Plate V",   span: "" },
+              { img: aboveClouds,  label: "immersed in space & removed from time", sub: "Plate VI",  span: "" },
+              { img: darkFlower,   label: "bound upon a bed of thistled vines",    sub: "Plate VII", span: "" },
+            ] as const).map(({ img, label, sub, span }, i) => (
+              <FadeIn key={i} delay={i * 0.08}>
+                <div className={`relative group cursor-crosshair ${span}`}>
                   {/* Shadow plate */}
-                  <div className="absolute inset-0 translate-x-3 translate-y-4 bg-black/60" />
-                  <div
-                    className="relative archive-frame transition-all duration-500 group-hover:scale-[1.02]"
-                    style={{ transform: `rotate(${rot})`, transformOrigin: "center bottom" }}
-                  >
-                    <img src={img} alt={label} className="w-full aspect-[3/4] object-cover" />
+                  <div className="absolute inset-0 translate-x-2 translate-y-3 bg-black/60 pointer-events-none" />
+                  <div className="relative archive-frame transition-all duration-500 group-hover:scale-[1.015]">
+                    <img src={img} alt={label} className="w-full aspect-[4/5] object-cover object-center" />
                     {/* Gold frame border */}
                     <div className="absolute inset-0 border border-primary/25 pointer-events-none" />
                     {/* Corner marks */}
@@ -782,12 +785,12 @@ export default function Home() {
                       <div key={j} className={`absolute ${cls} w-3 h-3 border-primary/50`} />
                     ))}
                     {/* Label strip */}
-                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/90 to-transparent p-5">
-                      <div className="font-serif text-sm text-primary/90 text-glow">{label}</div>
-                      <div className="font-mono text-[9px] tracking-[0.35em] text-primary/40 uppercase mt-0.5">{sub}</div>
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/95 to-transparent p-4">
+                      <div className="font-serif text-sm text-primary/90 text-glow leading-tight">{label}</div>
+                      <div className="font-mono text-[9px] tracking-[0.35em] text-primary/40 uppercase mt-1">{sub}</div>
                     </div>
                     {/* Gold shimmer on hover */}
-                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none" />
+                    <div className="absolute inset-0 bg-primary/8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none" />
                   </div>
                 </div>
               </FadeIn>
