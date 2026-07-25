@@ -742,7 +742,7 @@ export default function Home() {
           <FadeIn>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif text-glow mb-8 leading-tight">
               Into the night,<br className="hidden md:block"/>
-              immersed in space<br className="hidden md:block"/>
+              immersed in space{" "}<br className="hidden md:block"/>
               & removed from time.
             </h2>
           </FadeIn>
@@ -847,7 +847,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto mt-14 px-2">
             <FadeIn delay={0.2}>
               <h2 className="text-4xl md:text-6xl font-serif text-glow mb-8 leading-[0.95]">
-                I become a silhouette<br className="hidden md:block"/>& join the skyline.
+                I become a silhouette{" "}<br className="hidden md:block"/>& join the skyline.
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-4 text-base text-muted-foreground/80 font-light leading-relaxed border-l border-primary/20 pl-6">
