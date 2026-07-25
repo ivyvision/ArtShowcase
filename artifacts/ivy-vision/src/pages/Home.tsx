@@ -497,6 +497,162 @@ const PoetryArchive = () => {
   );
 };
 
+/* ── Poetry Scroll — one panel per photo ── */
+const PoetryPanel = ({
+  img, alt, align, lines, source, focal = "center",
+}: {
+  img: string; alt: string; align: "left" | "center" | "right";
+  lines: string[]; source: string; focal?: string;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const photoY   = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+  const textY    = useTransform(scrollYProgress, [0, 1], ["6%",  "-6%"]);
+  const opacity  = useTransform(scrollYProgress, [0.1, 0.28, 0.72, 0.9], [0, 1, 1, 0]);
+
+  const alignClass = align === "left"
+    ? "items-start text-left pl-8 md:pl-24"
+    : align === "right"
+    ? "items-end text-right pr-8 md:pr-24"
+    : "items-center text-center";
+
+  return (
+    <div ref={ref} className="relative w-full h-screen overflow-hidden">
+      {/* Parallax photo */}
+      <motion.div style={{ y: photoY }} className="absolute inset-[-12%] will-change-transform">
+        <img src={img} alt={alt} className="w-full h-full object-cover" style={{ objectPosition: focal }} />
+      </motion.div>
+
+      {/* Cinematic overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-background/60 pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-[hsl(22_60%_5%/0.35)] mix-blend-multiply pointer-events-none z-10" />
+      {/* Vignette edges */}
+      <div className="absolute inset-0 pointer-events-none z-10"
+        style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, hsl(22 55% 3% / 0.7) 100%)" }} />
+
+      {/* Poem text — drifts opposite to photo */}
+      <motion.div
+        style={{ opacity, y: textY }}
+        className={`absolute inset-0 z-20 flex flex-col justify-center gap-4 px-4 ${alignClass}`}
+      >
+        {/* Source label */}
+        <span className="font-mono text-[10px] tracking-[0.5em] text-primary/40 uppercase mb-2">{source}</span>
+
+        {/* Lines */}
+        {lines.map((line, i) =>
+          line === "" ? (
+            <div key={i} className="h-4" />
+          ) : (
+            <motion.p
+              key={i}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-20%" }}
+              transition={{ duration: 1.1, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif text-2xl md:text-4xl lg:text-5xl text-foreground/95 text-glow leading-tight max-w-2xl"
+            >
+              {line}
+            </motion.p>
+          )
+        )}
+
+        {/* Gold rule beneath */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: lines.length * 0.12 + 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className={`h-[1px] w-24 bg-gradient-to-r from-primary/60 to-transparent mt-4 origin-left ${align === "right" ? "origin-right rotate-180" : align === "center" ? "mx-auto" : ""}`}
+        />
+      </motion.div>
+    </div>
+  );
+};
+
+const PoetryScrollSection = () => (
+  <section className="z-10 relative">
+    <PoetryPanel
+      img={loreBg}      alt="Night — red dress"   align="right"  focal="center top"
+      source="Reaper · Estranged"
+      lines={[
+        "Looking up to watch",
+        "the night leak from black branches",
+        "",
+        "The leafless lifeless reapers,",
+        "desperate to absorb life",
+      ]}
+    />
+    <PoetryPanel
+      img={desertFrontal} alt="Desert — golden hour"  align="center" focal="center 30%"
+      source="Starlight · Estranged"
+      lines={[
+        "Into the night",
+        "Immersed in space",
+        "& removed from time",
+        "",
+        "Glimpse of obsidian",
+        "& stars shimmering white",
+      ]}
+    />
+    <PoetryPanel
+      img={gothicArch}  alt="Gothic arch — silhouette" align="left"  focal="center top"
+      source="Wholeness · Estranged"
+      lines={[
+        "Until it is impossible",
+        "to hold on to the Self",
+        "",
+        "So I become a silhouette",
+        "And join the trees",
+        "in the skyline",
+      ]}
+    />
+    <PoetryPanel
+      img={burningPoetry} alt="Burning paper — candle" align="right" focal="center"
+      source="Landscape · Estranged"
+      lines={[
+        "As snow absorbs the ashes,",
+        "awakened conscience falters",
+        "",
+        "Underneath,",
+        "true nature waits",
+      ]}
+    />
+    <PoetryPanel
+      img={falseProphet} alt="Brick wall — portrait"  align="center" focal="center 20%"
+      source="Indifference · Estranged"
+      lines={[
+        "So I'm revoking your privilege",
+        "to witness my life",
+        "",
+        "As I forge my way forward,",
+        "resilient and remarkable",
+      ]}
+    />
+    <PoetryPanel
+      img={aboveClouds} alt="Above the clouds"       align="left"   focal="center"
+      source="Starlight · Estranged"
+      lines={[
+        "Held in place",
+        "by the expansive divine",
+        "",
+        "At peace within the",
+        "Embrace of the sky",
+      ]}
+    />
+    <PoetryPanel
+      img={darkFlower}  alt="Dark figure — pink flower" align="right" focal="center 15%"
+      source="Reaper · Estranged"
+      lines={[
+        "Clenched in the gnarled",
+        "fingers of the trees",
+        "",
+        "Bound upon a bed",
+        "of thistled vines",
+      ]}
+    />
+  </section>
+);
+
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
@@ -744,60 +900,8 @@ export default function Home() {
       {/* Frequencies — real Spotify top tracks */}
       <FrequenciesSection />
 
-      {/* The Relics — vintage photo archive spread */}
-      <section className="z-10 py-32 bg-background relative overflow-hidden">
-        {/* Sacred Eye watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <SacredEye className="w-[500px] h-[500px] text-primary opacity-[0.04] sacred-glow" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-          <FadeIn>
-            <div className="flex items-center gap-5 mb-20">
-              <div className="h-[1px] w-8 bg-primary/50" />
-              <span className="text-primary font-mono tracking-[0.4em] uppercase text-xs">The Relics · Found Archive</span>
-              <div className="flex-1 h-[1px] bg-gradient-to-r from-primary/30 to-transparent" />
-              <span className="font-mono text-[10px] text-primary/30 tracking-widest">MCMXCIX</span>
-            </div>
-          </FadeIn>
-
-          {/* 7-plate archive grid — 3 cols, some spanning 2 for variety */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {([
-              { img: loreBg,       label: "night leak from black branches", sub: "Plate I",   span: "" },
-              { img: desertFrontal,label: "sun-gold body",                  sub: "Plate II",  span: "col-span-2 md:col-span-2" },
-              { img: burningPoetry,label: "awakened conscience falters",    sub: "Plate III", span: "" },
-              { img: gothicArch,   label: "I become a silhouette",          sub: "Plate IV",  span: "col-span-2 md:col-span-2" },
-              { img: falseProphet, label: "revoking your privilege",        sub: "Plate V",   span: "" },
-              { img: aboveClouds,  label: "immersed in space & removed from time", sub: "Plate VI",  span: "" },
-              { img: darkFlower,   label: "bound upon a bed of thistled vines",    sub: "Plate VII", span: "" },
-            ] as const).map(({ img, label, sub, span }, i) => (
-              <FadeIn key={i} delay={i * 0.08}>
-                <div className={`relative group cursor-crosshair ${span}`}>
-                  {/* Shadow plate */}
-                  <div className="absolute inset-0 translate-x-2 translate-y-3 bg-black/60 pointer-events-none" />
-                  <div className="relative archive-frame transition-all duration-500 group-hover:scale-[1.015]">
-                    <img src={img} alt={label} className="w-full aspect-[4/5] object-cover object-center" />
-                    {/* Gold frame border */}
-                    <div className="absolute inset-0 border border-primary/25 pointer-events-none" />
-                    {/* Corner marks */}
-                    {(["top-2 left-2 border-t border-l","top-2 right-2 border-t border-r","bottom-2 left-2 border-b border-l","bottom-2 right-2 border-b border-r"] as const).map((cls, j) => (
-                      <div key={j} className={`absolute ${cls} w-3 h-3 border-primary/50`} />
-                    ))}
-                    {/* Label strip */}
-                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/95 to-transparent p-4">
-                      <div className="font-serif text-sm text-primary/90 text-glow leading-tight">{label}</div>
-                      <div className="font-mono text-[9px] tracking-[0.35em] text-primary/40 uppercase mt-1">{sub}</div>
-                    </div>
-                    {/* Gold shimmer on hover */}
-                    <div className="absolute inset-0 bg-primary/8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none" />
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* The Relics — cinematic poetry scroll */}
+      <PoetryScrollSection />
 
       {/* Sanctuary / Connect — ancient temple gate */}
       <Section className="z-10 bg-background overflow-hidden relative">
