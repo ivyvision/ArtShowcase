@@ -68,140 +68,132 @@
 }
 
 :root {
-  --button-outline: rgba(0, 229, 209, 0.2);
-  --badge-outline: rgba(0, 229, 209, 0.1);
-
+  /* ── Ancient Gypsy Archive palette ─────────────────────────────── */
+  --button-outline: rgba(201, 154, 22, 0.22);
+  --badge-outline:  rgba(201, 154, 22, 0.12);
   --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(201, 154, 22, 0.05);
+  --elevate-2: rgba(201, 154, 22, 0.10);
 
-  --elevate-1: rgba(0, 229, 209, 0.05);
-  --elevate-2: rgba(0, 229, 209, 0.1);
+  /* Background: deep warm near-black — aged charcoal, cave walls */
+  --background: 22 55% 5%;
+  /* Foreground: aged parchment cream */
+  --foreground: 38 48% 80%;
+  --border: 32 40% 18%;
 
-  /* Force dark theme everywhere */
-  --background: 267 64% 11%;
-  --foreground: 159 90% 85%;
-  --border: 193 70% 25%;
-  
-  --card: 193 70% 15%;
-  --card-foreground: 159 90% 85%;
-  --card-border: 193 70% 25%;
+  --card: 22 50% 8%;
+  --card-foreground: 38 48% 80%;
+  --card-border: 32 40% 22%;
 
-  --sidebar: 267 64% 11%;
-  --sidebar-foreground: 159 90% 85%;
-  --sidebar-border: 193 70% 25%;
-  --sidebar-primary: 175 100% 45%;
-  --sidebar-primary-foreground: 267 64% 11%;
-  --sidebar-accent: 193 70% 15%;
-  --sidebar-accent-foreground: 175 100% 45%;
-  --sidebar-ring: 175 100% 45%;
+  --sidebar: 22 55% 5%;
+  --sidebar-foreground: 38 48% 80%;
+  --sidebar-border: 32 40% 18%;
+  --sidebar-primary: 43 72% 48%;
+  --sidebar-primary-foreground: 22 55% 5%;
+  --sidebar-accent: 25 35% 13%;
+  --sidebar-accent-foreground: 43 72% 48%;
+  --sidebar-ring: 43 72% 48%;
 
-  --popover: 267 64% 11%;
-  --popover-foreground: 159 90% 85%;
-  --popover-border: 193 70% 25%;
+  --popover: 22 55% 5%;
+  --popover-foreground: 38 48% 80%;
+  --popover-border: 32 40% 18%;
 
-  --primary: 175 100% 45%;
-  --primary-foreground: 267 64% 11%;
+  /* Primary: ancient gold — candlelight, old leaf */
+  --primary: 43 72% 48%;
+  --primary-foreground: 22 55% 5%;
 
-  --secondary: 337 47% 44%;
-  --secondary-foreground: 159 90% 85%;
+  /* Secondary: dark crimson wine — wax seals, dried blood */
+  --secondary: 353 55% 38%;
+  --secondary-foreground: 38 48% 80%;
 
-  --muted: 193 66% 22%;
-  --muted-foreground: 159 90% 70%;
+  --muted: 25 35% 13%;
+  --muted-foreground: 35 28% 52%;
 
-  --accent: 28 77% 50%;
-  --accent-foreground: 267 64% 11%;
+  /* Accent: deeper amber-copper */
+  --accent: 28 68% 42%;
+  --accent-foreground: 22 55% 5%;
 
-  /* Dusk palette pulled from the twilight photograph */
-  --ember:       25 90% 48%;   /* burning amber horizon glow   */
-  --dusk-slate:  220 28% 32%;  /* steel-blue upper sky         */
-  --moon-silver: 210 20% 82%;  /* crescent moon / ocean sheen  */
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 267 64% 11%;
-
-  --input: 193 70% 25%;
-  --ring: 175 100% 45%;
-  --chart-1: 175 100% 45%;
-  --chart-2: 337 47% 44%;
-  --chart-3: 159 90% 60%;
-  --chart-4: 28 77% 50%;
-  --chart-5: 267 64% 30%;
-
-  --app-font-sans: 'Space Grotesk', sans-serif;
-  --app-font-serif: 'Syne', sans-serif;
-  --app-font-mono: Menlo, monospace;
-  --radius: 0.5rem;
-  
-  --shadow-2xs: 0px 2px 0px 0px hsl(175 100% 45% / 0.1);
-  --shadow-xs: 0px 2px 0px 0px hsl(175 100% 45% / 0.15);
-  --shadow-sm: 0px 2px 0px 0px hsl(175 100% 45% / 0.15), 0px 1px 2px -1px hsl(175 100% 45% / 0.15);
-  --shadow: 0px 2px 0px 0px hsl(175 100% 45% / 0.15), 0px 1px 2px -1px hsl(175 100% 45% / 0.15);
-  --shadow-md: 0px 2px 0px 0px hsl(175 100% 45% / 0.15), 0px 2px 4px -1px hsl(175 100% 45% / 0.15);
-  --shadow-lg: 0px 2px 0px 0px hsl(175 100% 45% / 0.15), 0px 4px 6px -1px hsl(175 100% 45% / 0.15);
-  --shadow-xl: 0px 2px 0px 0px hsl(175 100% 45% / 0.15), 0px 8px 10px -1px hsl(175 100% 45% / 0.15);
-  --shadow-2xl: 0px 2px 0px 0px hsl(175 100% 45% / 0.15);
-  --tracking-normal: 0em;
-  --spacing: 0.25rem;
-}
-
-.dark {
-  --background: 267 64% 11%;
-  --foreground: 159 90% 85%;
-  --border: 193 70% 25%;
-  
-  --card: 193 70% 15%;
-  --card-foreground: 159 90% 85%;
-  --card-border: 193 70% 25%;
-
-  --sidebar: 267 64% 11%;
-  --sidebar-foreground: 159 90% 85%;
-  --sidebar-border: 193 70% 25%;
-  --sidebar-primary: 175 100% 45%;
-  --sidebar-primary-foreground: 267 64% 11%;
-  --sidebar-accent: 193 70% 15%;
-  --sidebar-accent-foreground: 175 100% 45%;
-  --sidebar-ring: 175 100% 45%;
-
-  --popover: 267 64% 11%;
-  --popover-foreground: 159 90% 85%;
-  --popover-border: 193 70% 25%;
-
-  --primary: 175 100% 45%;
-  --primary-foreground: 267 64% 11%;
-
-  --secondary: 337 47% 44%;
-  --secondary-foreground: 159 90% 85%;
-
-  --muted: 193 66% 22%;
-  --muted-foreground: 159 90% 70%;
-
-  --accent: 28 77% 50%;
-  --accent-foreground: 267 64% 11%;
-
+  /* Dusk photo palette — preserved from photograph */
   --ember:       25 90% 48%;
   --dusk-slate:  220 28% 32%;
   --moon-silver: 210 20% 82%;
 
   --destructive: 0 84% 60%;
-  --destructive-foreground: 267 64% 11%;
+  --destructive-foreground: 22 55% 5%;
 
-  --input: 193 70% 25%;
-  --ring: 175 100% 45%;
-  --chart-1: 175 100% 45%;
-  --chart-2: 337 47% 44%;
-  --chart-3: 159 90% 60%;
-  --chart-4: 28 77% 50%;
-  --chart-5: 267 64% 30%;
+  --input: 32 40% 18%;
+  --ring: 43 72% 48%;
+  --chart-1: 43 72% 48%;
+  --chart-2: 353 55% 38%;
+  --chart-3: 38 55% 65%;
+  --chart-4: 28 68% 42%;
+  --chart-5: 22 55% 25%;
+
+  --app-font-sans: 'Space Grotesk', sans-serif;
+  --app-font-serif: 'Syne', sans-serif;
+  --app-font-mono: Menlo, monospace;
+  --radius: 0.5rem;
+
+  --shadow-2xs: 0px 2px 0px 0px hsl(43 72% 48% / 0.10);
+  --shadow-xs:  0px 2px 0px 0px hsl(43 72% 48% / 0.15);
+  --shadow-sm:  0px 2px 0px 0px hsl(43 72% 48% / 0.15), 0px 1px 2px -1px hsl(43 72% 48% / 0.15);
+  --shadow:     0px 2px 0px 0px hsl(43 72% 48% / 0.15), 0px 1px 2px -1px hsl(43 72% 48% / 0.15);
+  --shadow-md:  0px 2px 0px 0px hsl(43 72% 48% / 0.15), 0px 2px 4px -1px hsl(43 72% 48% / 0.15);
+  --shadow-lg:  0px 2px 0px 0px hsl(43 72% 48% / 0.15), 0px 4px 6px -1px hsl(43 72% 48% / 0.15);
+  --shadow-xl:  0px 2px 0px 0px hsl(43 72% 48% / 0.15), 0px 8px 10px -1px hsl(43 72% 48% / 0.15);
+  --shadow-2xl: 0px 2px 0px 0px hsl(43 72% 48% / 0.15);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: 22 55% 5%;
+  --foreground: 38 48% 80%;
+  --border: 32 40% 18%;
+  --card: 22 50% 8%;
+  --card-foreground: 38 48% 80%;
+  --card-border: 32 40% 22%;
+  --sidebar: 22 55% 5%;
+  --sidebar-foreground: 38 48% 80%;
+  --sidebar-border: 32 40% 18%;
+  --sidebar-primary: 43 72% 48%;
+  --sidebar-primary-foreground: 22 55% 5%;
+  --sidebar-accent: 25 35% 13%;
+  --sidebar-accent-foreground: 43 72% 48%;
+  --sidebar-ring: 43 72% 48%;
+  --popover: 22 55% 5%;
+  --popover-foreground: 38 48% 80%;
+  --popover-border: 32 40% 18%;
+  --primary: 43 72% 48%;
+  --primary-foreground: 22 55% 5%;
+  --secondary: 353 55% 38%;
+  --secondary-foreground: 38 48% 80%;
+  --muted: 25 35% 13%;
+  --muted-foreground: 35 28% 52%;
+  --accent: 28 68% 42%;
+  --accent-foreground: 22 55% 5%;
+  --ember:       25 90% 48%;
+  --dusk-slate:  220 28% 32%;
+  --moon-silver: 210 20% 82%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 22 55% 5%;
+  --input: 32 40% 18%;
+  --ring: 43 72% 48%;
+  --chart-1: 43 72% 48%;
+  --chart-2: 353 55% 38%;
+  --chart-3: 38 55% 65%;
+  --chart-4: 28 68% 42%;
+  --chart-5: 22 55% 25%;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
-    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-primary-foreground;
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden
+           selection:bg-primary selection:text-primary-foreground;
   }
-  
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif tracking-tight;
   }
@@ -209,100 +201,117 @@
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3);
+    text-shadow: 0 0 18px hsl(43 72% 48% / 0.55), 0 0 40px hsl(43 72% 48% / 0.28);
   }
   .text-glow-secondary {
-    text-shadow: 0 0 20px hsl(var(--secondary) / 0.5), 0 0 40px hsl(var(--secondary) / 0.3);
+    text-shadow: 0 0 18px hsl(353 55% 38% / 0.55), 0 0 40px hsl(353 55% 38% / 0.28);
   }
   .text-glow-ember {
-    text-shadow: 0 0 20px hsl(var(--ember) / 0.6), 0 0 45px hsl(var(--ember) / 0.35);
+    text-shadow: 0 0 20px hsl(25 90% 48% / 0.6), 0 0 45px hsl(25 90% 48% / 0.35);
   }
   .box-glow {
-    box-shadow: 0 0 30px hsl(var(--primary) / 0.2), inset 0 0 20px hsl(var(--primary) / 0.1);
+    box-shadow: 0 0 30px hsl(43 72% 48% / 0.18), inset 0 0 20px hsl(43 72% 48% / 0.08);
   }
   .box-glow-ember {
-    box-shadow: 0 0 40px hsl(var(--ember) / 0.25), inset 0 0 20px hsl(var(--ember) / 0.1);
+    box-shadow: 0 0 40px hsl(25 90% 48% / 0.25), inset 0 0 20px hsl(25 90% 48% / 0.10);
   }
   .ember-border {
-    border-color: hsl(var(--ember) / 0.3);
+    border-color: hsl(25 90% 48% / 0.30);
   }
-  
+
+  /* Aged archive photo frame */
+  .archive-frame {
+    box-shadow:
+      6px 8px 24px rgba(0,0,0,0.75),
+      0 0 0 1px hsl(43 72% 48% / 0.22),
+      inset 0 0 40px rgba(0,0,0,0.25);
+    filter: sepia(0.18) contrast(1.04) brightness(0.96);
+  }
+
+  /* Sacred geometry faint glow */
+  .sacred-glow {
+    filter: drop-shadow(0 0 6px hsl(43 72% 48% / 0.35));
+  }
+
   .glass-panel {
-    @apply bg-background/40 backdrop-blur-md border border-white/10;
+    background: hsl(22 50% 8% / 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(32 40% 22% / 0.5);
   }
 }
 
-/* Animations */
+/* ── Animations ────────────────────────────────────────────────── */
 @keyframes bio-pulse {
-  0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 229, 209, 0.4)) drop-shadow(0 0 30px rgba(0, 229, 209, 0.2)); }
-  50% { filter: drop-shadow(0 0 25px rgba(0, 229, 209, 0.7)) drop-shadow(0 0 50px rgba(0, 229, 209, 0.4)); }
+  0%, 100% {
+    filter: drop-shadow(0 0 14px hsl(43 72% 48% / 0.45))
+            drop-shadow(0 0 30px hsl(43 72% 48% / 0.22));
+  }
+  50% {
+    filter: drop-shadow(0 0 24px hsl(43 72% 48% / 0.75))
+            drop-shadow(0 0 50px hsl(43 72% 48% / 0.40));
+  }
 }
+.animate-bio-pulse { animation: bio-pulse 4s ease-in-out infinite; }
 
-.animate-bio-pulse {
-  animation: bio-pulse 4s ease-in-out infinite;
-}
-
-/* Logo: invert makes white→black, hue-rotate restores original teal hue,
-   screen blend makes black transparent on dark backgrounds.
-   Mask fades the rectangular edges so no hard box border remains. */
+/* Logo treatment:
+   JPEG has white bg → invert makes it black.
+   hue-rotate(45deg) + saturate shifts the teal logo to ancient gold.
+   mix-blend-mode:screen makes the black background fully transparent. */
 .logo-container {
   position: relative;
-  mask-image: radial-gradient(ellipse 75% 68% at 50% 52%, black 50%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 68% at 50% 52%, black 50%, transparent 85%);
+  /* No mask — the dark hero vignette handles the bg; just let screen blend do the work */
 }
-
 .logo-blend {
   display: block;
   width: 100%;
   height: auto;
-  filter: invert(1) hue-rotate(180deg) saturate(1.3) brightness(1.1);
-  mix-blend-mode: screen;
+  /* SVG chroma-key (#ivy-logo-chroma defined in JSX) converts luminance → alpha,
+     making the near-black JPEG background fully transparent regardless of compression artifacts.
+     hue-rotate(45deg) shifts teal → ancient gold. */
+  filter: invert(1) hue-rotate(45deg) saturate(2.4) brightness(1.5) url('#ivy-logo-chroma');
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-10px) rotate(2deg); }
-  66% { transform: translateY(5px) rotate(-1deg); }
+  33%  { transform: translateY(-10px) rotate(2deg); }
+  66%  { transform: translateY(5px)  rotate(-1deg); }
 }
+.animate-float { animation: float 8s ease-in-out infinite; }
 
-.animate-float {
-  animation: float 8s ease-in-out infinite;
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
+.animate-spin-slow { animation: spin-slow 60s linear infinite; }
 
 @keyframes swirl {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 .bg-swirl {
   background-size: 200% 200%;
-  animation: swirl 15s ease infinite;
+  animation: swirl 20s ease infinite;
 }
 
 @keyframes noise {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -5%); }
-  20% { transform: translate(-10%, 5%); }
-  30% { transform: translate(5%, -10%); }
-  40% { transform: translate(-5%, 15%); }
-  50% { transform: translate(-10%, 5%); }
-  60% { transform: translate(15%, 0); }
-  70% { transform: translate(0, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+  0%, 100% { transform: translate(0,    0); }
+  10%       { transform: translate(-5%, -5%); }
+  20%       { transform: translate(-10%, 5%); }
+  30%       { transform: translate(5%, -10%); }
+  40%       { transform: translate(-5%,  15%); }
+  50%       { transform: translate(-10%, 5%); }
+  60%       { transform: translate(15%,  0); }
+  70%       { transform: translate(0,    15%); }
+  80%       { transform: translate(3%,   35%); }
+  90%       { transform: translate(-10%, 10%); }
 }
-
 .bg-noise {
   position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  width: 200%;
-  height: 200%;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  width: 200%; height: 200%;
   background: transparent url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
-  opacity: 0.05;
+  opacity: 0.04;
   pointer-events: none;
   animation: noise 8s steps(10) infinite;
   z-index: 50;

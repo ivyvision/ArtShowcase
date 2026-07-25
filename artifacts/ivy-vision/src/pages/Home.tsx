@@ -6,6 +6,7 @@ import heroBg from "@assets/IMG_20260623_193409_10_186_1784945099904.jpeg";
 import loreBg from "@assets/1_IMG_5010_1784945745561.jpeg";
 import musicBg from "@assets/0_IMG_8612_1784945745560.jpeg";
 import connectBg from "@assets/IMG_8613_1784944861332.jpeg";
+import profileBg from "@assets/IMG_8611_1784947359440.jpeg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
@@ -166,6 +167,65 @@ const VineDecoration = ({ className = "" }: { className?: string }) => (
     <circle cx="35" cy="320" r="5" fill="currentColor" className="animate-pulse" style={{ animationDelay: '1.5s' }} />
     <path d="M50 150 Q 70 140 80 160" stroke="currentColor" strokeWidth="1.5" fill="none" />
     <path d="M50 250 Q 30 240 20 260" stroke="currentColor" strokeWidth="1.5" fill="none" />
+  </svg>
+);
+
+// ── Sacred Geometry SVG Components ─────────────────────────────────
+const FLOWER_CENTERS: [number,number][] = [
+  [100,100],[100,60],[134.64,80],[134.64,120],[100,140],[65.36,120],[65.36,80],
+];
+
+const FlowerOfLife = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {FLOWER_CENTERS.map(([cx,cy],i) => (
+      <circle key={i} cx={cx} cy={cy} r="40" stroke="currentColor" strokeWidth="0.5" />
+    ))}
+    <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="0.3" />
+  </svg>
+);
+
+const MetatronsCube = ({ className = "" }: { className?: string }) => {
+  const pairs: [number,number][] = [];
+  for (let i = 0; i < FLOWER_CENTERS.length; i++)
+    for (let j = i+1; j < FLOWER_CENTERS.length; j++)
+      pairs.push([i,j]);
+  return (
+    <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {pairs.map(([i,j],k) => (
+        <line key={k}
+          x1={FLOWER_CENTERS[i][0]} y1={FLOWER_CENTERS[i][1]}
+          x2={FLOWER_CENTERS[j][0]} y2={FLOWER_CENTERS[j][1]}
+          stroke="currentColor" strokeWidth="0.4" />
+      ))}
+      {FLOWER_CENTERS.map(([cx,cy],i) => (
+        <circle key={i} cx={cx} cy={cy} r="40" stroke="currentColor" strokeWidth="0.4" />
+      ))}
+      <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="0.3" />
+    </svg>
+  );
+};
+
+const SacredEye = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="95" stroke="currentColor" strokeWidth="0.4" />
+    <polygon points="100,18 188,168 12,168" stroke="currentColor" strokeWidth="0.7" />
+    <ellipse cx="100" cy="108" rx="46" ry="30" stroke="currentColor" strokeWidth="0.7" />
+    <circle cx="100" cy="108" r="14" stroke="currentColor" strokeWidth="0.7" />
+    <circle cx="100" cy="108" r="6" fill="currentColor" opacity="0.35" />
+    {Array.from({length:16},(_,i)=>{
+      const a=(i*22.5-90)*Math.PI/180;
+      return <line key={i}
+        x1={100+88*Math.cos(a)} y1={100+88*Math.sin(a)}
+        x2={100+96*Math.cos(a)} y2={100+96*Math.sin(a)}
+        stroke="currentColor" strokeWidth="0.5"/>;
+    })}
+  </svg>
+);
+
+const VesicaPiscis = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="110" cy="100" r="80" stroke="currentColor" strokeWidth="0.6" />
+    <circle cx="190" cy="100" r="80" stroke="currentColor" strokeWidth="0.6" />
   </svg>
 );
 
@@ -430,44 +490,67 @@ export default function Home() {
 
   return (
     <div className="relative w-full bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-primary-foreground">
+      {/* SVG chroma-key filter — makes logo JPEG black bg truly transparent via luminance→alpha */}
+      <svg className="absolute w-0 h-0 overflow-hidden" aria-hidden="true">
+        <defs>
+          <filter id="ivy-logo-chroma" colorInterpolationFilters="sRGB">
+            {/* A' = 3R + 3G + 3B - 1·A  →  black(0,0,0)→A=−1→0, any bright pixel→A>0 */}
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  3 3 3 -1 0" />
+          </filter>
+        </defs>
+      </svg>
       <div className="bg-noise" />
 
       {/* Hero Section */}
       <Section className="overflow-hidden items-center justify-center p-0 m-0">
-        <motion.div 
-          className="absolute inset-0 z-0"
-          style={{ y: heroY, opacity: heroOpacity }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
-          <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10" />
-          {/* Ember horizon warmth bleeding up from the dusk photograph palette */}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[hsl(25_90%_48%/0.08)] to-transparent z-10 pointer-events-none" />
-          <img src={heroBg} alt="Bioluminescent harbor" className="w-full h-full object-cover object-center opacity-40" />
+        {/* Parallax photo */}
+        <motion.div className="absolute inset-0 z-0" style={{ y: heroY, opacity: heroOpacity }}>
+          <img src={heroBg} alt="Ancient desert sage" className="w-full h-full object-cover object-center opacity-55" />
+          {/* Warm sepia grade */}
+          <div className="absolute inset-0 bg-[hsl(28_60%_12%/0.55)] mix-blend-multiply z-10" />
+          {/* Bottom fade to background */}
+          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/70 to-transparent z-10" />
         </motion.div>
-        
+
+        {/* Flower of Life — large, slowly rotating behind logo */}
+        <div className="absolute inset-0 flex items-center justify-center z-[8] pointer-events-none">
+          <FlowerOfLife className="w-[600px] h-[600px] text-primary opacity-[0.06] animate-spin-slow sacred-glow" />
+        </div>
+
+        {/* Edge-only vignette — keep center bright so screen-blend erases the black JPEG bg */}
+        <div className="absolute inset-0 z-[9] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 72% 68% at 50% 48%, transparent 35%, rgba(8,4,2,0.65) 80%, rgba(8,4,2,0.92) 100%)" }} />
+
         <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="w-full max-w-2xl animate-float relative"
+            className="w-full max-w-xl animate-float"
           >
             <div className="logo-container animate-bio-pulse">
-              <img 
-                src={ivyLogo} 
-                alt="IvyVision Logo" 
-                className="logo-blend"
-              />
+              <img src={ivyLogo} alt="IvyVision Logo" className="logo-blend" />
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 1 }}
+            className="flex items-center gap-4 mt-4"
+          >
+            <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-primary/50" />
+            <span className="font-mono text-[10px] tracking-[0.5em] text-primary/60 uppercase">Ancient · Gnostic · Untamed</span>
+            <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-primary/50" />
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-12 flex flex-col items-center gap-4 text-primary/70"
+            transition={{ delay: 1.8, duration: 1 }}
+            className="absolute bottom-12 flex flex-col items-center gap-4 text-primary/60"
           >
-            <span className="text-xs uppercase tracking-[0.3em] font-mono">Descend</span>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-mono">Descend</span>
             <div className="w-[1px] h-16 bg-gradient-to-b from-primary/50 to-transparent" />
           </motion.div>
         </div>
@@ -508,48 +591,74 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Lore */}
+      {/* Oracle / Lore — lost archive plate */}
       <Section className="z-10 bg-background overflow-hidden relative">
-        <div className="absolute inset-0 opacity-20">
-          <img src={loreBg} alt="Lore background" className="w-full h-full object-cover object-left-top mix-blend-luminosity" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+        {/* Metatron's Cube watermark */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <MetatronsCube className="w-[700px] h-[700px] text-primary opacity-[0.04] sacred-glow" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+            {/* Archive plate portrait — tilted, aged */}
+            <FadeIn>
+              <div className="relative">
+                {/* Shadow plate beneath */}
+                <div className="absolute inset-0 translate-x-4 translate-y-5 bg-black/50 rounded-sm" />
+                <div className="relative archive-frame" style={{ transform: "rotate(-2deg)" }}>
+                  <img src={profileBg} alt="Oracle" className="w-full aspect-[3/4] object-cover object-top rounded-sm" />
+                  {/* Warm sepia grade */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[hsl(22_55%_5%)] via-transparent to-transparent rounded-sm" />
+                  {/* Gold frame border */}
+                  <div className="absolute inset-0 border border-primary/30 rounded-sm pointer-events-none" />
+                  {/* Archive label */}
+                  <div className="absolute bottom-6 left-6">
+                    <div className="font-mono text-[10px] tracking-[0.4em] text-primary/70 uppercase">Oracle Archives · Vol. I</div>
+                  </div>
+                  {/* Corner geometry marks */}
+                  {[["top-2 left-2","border-t border-l"],["top-2 right-2","border-t border-r"],["bottom-2 left-2","border-b border-l"],["bottom-2 right-2","border-b border-r"]].map(([pos,border],i) => (
+                    <div key={i} className={`absolute ${pos} w-4 h-4 border-primary/50 ${border}`} />
+                  ))}
+                </div>
+                {/* Vesica Piscis ornament below */}
+                <VesicaPiscis className="w-32 text-primary/20 mx-auto mt-4 sacred-glow" />
+              </div>
+            </FadeIn>
+
+            {/* Text */}
             <div>
               <FadeIn>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-[1px] bg-secondary" />
-                  <span className="text-secondary font-mono tracking-widest uppercase text-sm">The Oracle</span>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-10 h-[1px] bg-primary/60" />
+                  <span className="text-primary/80 font-mono tracking-[0.35em] uppercase text-xs">The Oracle</span>
                 </div>
-                <h2 className="text-5xl md:text-6xl font-serif text-glow-secondary mb-8">
-                  Street <br/> Mysticism.
+                <h2 className="text-5xl md:text-6xl font-serif text-glow mb-8 leading-[0.9]">
+                  Ancient<br/>Gypsy<br/>Sage.
                 </h2>
               </FadeIn>
-              
+
               <FadeIn delay={0.2}>
-                <div className="space-y-6 text-lg text-muted-foreground/80 font-light leading-relaxed">
+                <div className="space-y-6 text-base text-muted-foreground/80 font-light leading-relaxed border-l border-primary/20 pl-6">
                   <p>
-                    I trace the ley lines of the city grid, finding where the ancient magic pulses beneath asphalt. The graffiti tags are sigils. The streetlights are dying stars.
+                    She walks where the old maps end. Keeper of forgotten dialects, translator of wind and stone. Her art is a palimpsest — ancient scripture beneath modern ink, each layer revealing what was never truly buried.
                   </p>
                   <p>
-                    We built concrete over the wild, but the wild is reclaiming us. Solarpunk isn't just an aesthetic; it's a prophecy. The vines will break the walls. The oceans will reclaim the shores. My art is a documentation of this beautiful collapse.
+                    The desert remembers every footprint. The forest holds every whisper. She is both archive and archivist — the one who was there and the one who writes it down.
                   </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.4}>
+                <div className="mt-10 flex items-center gap-3">
+                  <SacredEye className="w-10 h-10 text-primary/40 sacred-glow" />
+                  <div>
+                    <div className="font-mono text-[10px] tracking-widest text-primary/50 uppercase">Gnosis</div>
+                    <div className="font-serif text-sm text-muted-foreground/60 italic mt-0.5">"Know thyself, and thou shalt know the universe."</div>
+                  </div>
                 </div>
               </FadeIn>
             </div>
-            
-            <FadeIn delay={0.4}>
-              <div className="relative aspect-square md:aspect-[4/5] rounded-t-full overflow-hidden border border-white/10 box-glow">
-                <img src={loreBg} alt="Oracle" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-background to-transparent">
-                  <div className="font-serif text-3xl text-primary text-glow">Genesis</div>
-                  <div className="font-mono text-xs text-primary/60 tracking-widest uppercase mt-2">Archive 01</div>
-                </div>
-              </div>
-            </FadeIn>
           </div>
         </div>
       </Section>
@@ -584,73 +693,133 @@ export default function Home() {
       {/* Frequencies — real Spotify top tracks */}
       <FrequenciesSection />
 
-      {/* Visuals / Artifacts */}
-      <Section className="z-10 py-32 bg-background relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 w-full relative z-20">
+      {/* The Relics — vintage photo archive spread */}
+      <section className="z-10 py-32 bg-background relative overflow-hidden">
+        {/* Sacred Eye watermark */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <SacredEye className="w-[500px] h-[500px] text-primary opacity-[0.04] sacred-glow" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
           <FadeIn>
-            <div className="flex items-center gap-4 mb-16">
-              <span className="text-secondary font-mono tracking-widest uppercase text-sm">Artifacts</span>
-              <div className="flex-1 h-[1px] bg-gradient-to-r from-secondary/50 to-transparent" />
+            <div className="flex items-center gap-5 mb-20">
+              <div className="h-[1px] w-8 bg-primary/50" />
+              <span className="text-primary font-mono tracking-[0.4em] uppercase text-xs">The Relics · Found Archive</span>
+              <div className="flex-1 h-[1px] bg-gradient-to-r from-primary/30 to-transparent" />
+              <span className="font-mono text-[10px] text-primary/30 tracking-widest">MCMXCIX</span>
             </div>
           </FadeIn>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[heroBg, loreBg, musicBg].map((img, i) => (
-              <FadeIn key={i} delay={i * 0.2}>
-                <div className="group relative aspect-[3/4] rounded-sm overflow-hidden border border-white/5 cursor-crosshair">
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay z-10" />
-                  <img src={img} alt={`Artifact 0${i + 1}`} className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
-                  <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background via-background/80 to-transparent z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <p className="font-mono text-xs text-primary/70 uppercase tracking-widest">Vision {String(i + 1).padStart(2, '0')}</p>
+
+          {/* Overlapping vintage photo spread */}
+          <div className="relative flex flex-wrap justify-center gap-6 md:gap-0 md:block min-h-[600px]">
+            {[
+              { img: heroBg,    label: "Desert Sage",       sub: "Plate I",   rot: "-2deg",  pos: "md:absolute md:top-0 md:left-[5%]   md:w-[38%]" },
+              { img: loreBg,    label: "Smoke Oracle",      sub: "Plate II",  rot: "1.5deg", pos: "md:absolute md:top-16 md:left-[30%] md:w-[32%]" },
+              { img: profileBg, label: "The Wanderer",      sub: "Plate III", rot: "-1deg",  pos: "md:absolute md:top-8  md:right-[5%] md:w-[36%]" },
+              { img: musicBg,   label: "Dried Rose",        sub: "Plate IV",  rot: "2.5deg", pos: "md:absolute md:bottom-0 md:left-[18%] md:w-[28%]" },
+            ].map(({ img, label, sub, rot, pos }, i) => (
+              <FadeIn key={i} delay={i * 0.15}>
+                <div className={`relative group cursor-crosshair ${pos}`} style={{ zIndex: i + 1 }}>
+                  {/* Shadow plate */}
+                  <div className="absolute inset-0 translate-x-3 translate-y-4 bg-black/60" />
+                  <div
+                    className="relative archive-frame transition-all duration-500 group-hover:scale-[1.02]"
+                    style={{ transform: `rotate(${rot})`, transformOrigin: "center bottom" }}
+                  >
+                    <img src={img} alt={label} className="w-full aspect-[3/4] object-cover" />
+                    {/* Gold frame border */}
+                    <div className="absolute inset-0 border border-primary/25 pointer-events-none" />
+                    {/* Corner marks */}
+                    {(["top-2 left-2 border-t border-l","top-2 right-2 border-t border-r","bottom-2 left-2 border-b border-l","bottom-2 right-2 border-b border-r"] as const).map((cls, j) => (
+                      <div key={j} className={`absolute ${cls} w-3 h-3 border-primary/50`} />
+                    ))}
+                    {/* Label strip */}
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/90 to-transparent p-5">
+                      <div className="font-serif text-sm text-primary/90 text-glow">{label}</div>
+                      <div className="font-mono text-[9px] tracking-[0.35em] text-primary/40 uppercase mt-0.5">{sub}</div>
+                    </div>
+                    {/* Gold shimmer on hover */}
+                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none" />
                   </div>
                 </div>
               </FadeIn>
             ))}
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Connect / Footer */}
+      {/* Sanctuary / Connect — ancient temple gate */}
       <Section className="z-10 bg-background overflow-hidden relative">
-        <div className="absolute inset-0 opacity-30 mix-blend-luminosity">
+        {/* Photo backdrop */}
+        <div className="absolute inset-0 opacity-25">
           <img src={connectBg} alt="Portal" className="w-full h-full object-cover object-bottom" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background" />
+          <div className="absolute inset-0 bg-[hsl(28_60%_10%/0.5)] mix-blend-multiply" />
         </div>
-        
-        <div className="max-w-4xl mx-auto px-6 w-full text-center relative z-20">
+
+        {/* FlowerOfLife watermark */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <FlowerOfLife className="w-[800px] h-[800px] text-primary opacity-[0.035] sacred-glow animate-spin-slow" style={{ animationDirection: "reverse" } as React.CSSProperties} />
+        </div>
+
+        <div className="max-w-3xl mx-auto px-6 w-full text-center relative z-20">
           <FadeIn>
-            <div className="inline-block mb-6 p-4 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md">
-              <img src={ivyLogo} alt="Mark" className="w-16 h-16 logo-blend" />
+            {/* Sacred Eye sigil */}
+            <div className="flex justify-center mb-8">
+              <SacredEye className="w-24 h-24 text-primary/50 sacred-glow" />
             </div>
-            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-6">Enter the Sanctuary</h2>
-            <p className="text-xl text-muted-foreground font-light mb-12 max-w-2xl mx-auto">
-              Join the inner circle. Receive dispatches, secret tracks, and coordinate drops for underground poetry readings.
+
+            {/* Decorative rule */}
+            <div className="flex items-center gap-4 justify-center mb-8">
+              <div className="h-[1px] w-20 bg-gradient-to-r from-transparent to-primary/50" />
+              <span className="font-mono text-[10px] tracking-[0.5em] text-primary/40 uppercase">Sacred Entrance</span>
+              <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-primary/50" />
+            </div>
+
+            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-4">Enter the Sanctuary</h2>
+            <p className="font-mono text-xs tracking-[0.4em] text-primary/40 uppercase mb-10">
+              ✦ Lost Archive · Open Gate ✦
             </p>
-            
-            <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-16" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="your@frequency.com" 
-                className="flex-1 bg-white/5 border border-white/10 rounded-full px-6 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-mono"
+            <p className="text-lg text-muted-foreground/70 font-light mb-12 max-w-xl mx-auto leading-relaxed">
+              Join the inner circle. Receive dispatches from the archive — secret tracks, poetry drops, and transmissions from the ancient edge.
+            </p>
+
+            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-14" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="your@sanctuary.here"
+                className="flex-1 bg-[hsl(22_50%_8%/0.8)] border border-primary/20 rounded-none px-6 py-4 text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/60 transition-all font-mono text-sm"
               />
-              <button className="bg-primary text-background font-mono font-bold tracking-widest uppercase px-8 py-4 rounded-full hover:bg-white transition-colors hover:shadow-[0_0_30px_rgba(0,229,209,0.5)]">
+              <button className="bg-primary text-background font-mono font-bold tracking-[0.2em] uppercase px-8 py-4 rounded-none hover:bg-primary/80 transition-colors hover:shadow-[0_0_24px_hsl(43_72%_48%/0.4)]">
                 Initiate
               </button>
             </form>
-            
-            <div className="flex items-center justify-center gap-8">
-              {[Instagram, Twitter, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="p-4 rounded-full border border-white/10 hover:border-primary/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all">
-                  <Icon className="w-6 h-6" />
+
+            {/* Ornamental divider */}
+            <div className="flex items-center gap-3 justify-center mb-8">
+              <div className="h-[1px] flex-1 bg-primary/15" />
+              <span className="text-primary/30 text-xs">✦</span>
+              <div className="h-[1px] flex-1 bg-primary/15" />
+            </div>
+
+            <div className="flex items-center justify-center gap-6">
+              {[
+                { Icon: Instagram, href: "https://instagram.com/ivy.coconuts" },
+                { Icon: Twitter,   href: "#" },
+                { Icon: Youtube,   href: "#" },
+              ].map(({ Icon, href }, i) => (
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer"
+                  className="p-4 border border-primary/20 hover:border-primary/50 hover:bg-primary/10 text-muted-foreground/60 hover:text-primary transition-all">
+                  <Icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
           </FadeIn>
         </div>
-        
+
         <div className="absolute bottom-6 left-0 w-full text-center">
-          <p className="font-mono text-xs text-muted-foreground/30 uppercase tracking-[0.3em]">
-            © {new Date().getFullYear()} IvyVision. The Tide is Rising.
+          <p className="font-mono text-[10px] text-primary/20 uppercase tracking-[0.4em]">
+            © {new Date().getFullYear()} IvyVision · The Archive is Alive
           </p>
         </div>
       </Section>
