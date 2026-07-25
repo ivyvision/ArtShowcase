@@ -572,7 +572,7 @@ const PoetryPanel = ({
 const PoetryScrollSection = () => (
   <section className="z-10 relative">
     <PoetryPanel
-      img={loreBg}      alt="Night — red dress"   align="right"  focal="center top"
+      img={loreBg}      alt="Night — red dress"   align="left"   focal="center top"
       source="Reaper · Estranged"
       lines={[
         "Looking up to watch",
