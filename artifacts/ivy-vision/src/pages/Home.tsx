@@ -20,6 +20,8 @@ import falseProphet from "@assets/Untitled_design_1784953364358.png";
 import aboveClouds from "@assets/IMG_8654_1784957576757.jpeg";
 import gothicArch from "@assets/IMG_8649_1784957576757.jpeg";
 import darkFlower from "@assets/IMG_8659_1784957576757.jpeg";
+import wildflowerField from "@assets/IMG_8673_1784966063991.jpeg";
+import aboveCloudsWide from "@assets/IMG_8672_1784966063991.jpeg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
@@ -2054,6 +2056,30 @@ const PoetryScrollSection = () => (
         "",
         "At peace within the",
         "Embrace of the sky",
+      ]}
+    />
+    <PoetryPanel
+      img={wildflowerField} alt="Wildflower field" align="left" focal="center 60%"
+      source="Cypsela Lips · Estranged"
+      lines={[
+        "Honeybee,",
+        "I seek for yellow efflorescent ground",
+        "",
+        "Wherever you have walked, my darling",
+        "Wildflowers abound",
+      ]}
+    />
+    <PoetryPanel
+      img={aboveCloudsWide} alt="Above the clouds — orange sunset" align="center" focal="center 40%"
+      source="The Sky · Estranged"
+      lines={[
+        "In all the places I find myself",
+        "",
+        "The only thing that's always been there",
+        "is the sky",
+        "",
+        "And silently gaze up in reverence",
+        "When I'm alone",
       ]}
     />
     <PoetryPanel
