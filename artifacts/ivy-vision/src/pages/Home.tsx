@@ -462,7 +462,7 @@ const CHAPTERS = [
     number: 2,
     title: "Sleeping Udumbara",
     epigraph: {
-      text: ""If one does not grasp the essence of existence, like the udumbara flower on a fig-tree; that bhikkhu abandons the here and the beyond, as a snake abandons its old slough."",
+      text: `"If one does not grasp the essence of existence, like the udumbara flower on a fig-tree; that bhikkhu abandons the here and the beyond, as a snake abandons its old slough."`,
       source: "Sutta Nipāta 5.14",
     },
     poems: [
@@ -1210,7 +1210,7 @@ const CHAPTERS = [
     number: 4,
     title: "Picking Through Devoured Petals",
     epigraph: {
-      text: ""Do not forever with thy vailèd lids seek for thy noble father in the dust. Thou know'st 'tis common. All that lives must die, passing through nature to eternity."",
+      text: `"Do not forever with thy vailèd lids seek for thy noble father in the dust. Thou know'st 'tis common. All that lives must die, passing through nature to eternity."`,
       source: "Hamlet 1.2 72–75",
     },
     poems: [
