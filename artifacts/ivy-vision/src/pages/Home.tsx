@@ -937,10 +937,7 @@ export default function Home() {
               <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
-            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-4">At peace within the embrace of the sky.</h2>
-            <p className="font-mono text-xs tracking-[0.4em] text-primary/40 uppercase mb-10">
-              ✦ nothing lasts forever · but some things are worth ✦
-            </p>
+            <h2 className="text-5xl md:text-7xl font-serif text-glow mb-10">At peace within the embrace of the sky.</h2>
             <p className="text-lg text-muted-foreground/70 font-light mb-12 max-w-xl mx-auto leading-relaxed">
               It's true that nothing lasts forever. But some things are worth trying to hold onto.
             </p>
