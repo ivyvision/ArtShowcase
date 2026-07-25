@@ -12,6 +12,7 @@ import reaperForest from "@assets/generated_images/reaper_forest.jpg";
 import alchemicalChart from "@assets/generated_images/alchemical_chart.jpg";
 import descentThreshold from "@assets/generated_images/descent_threshold.jpg";
 import mementoMoriHands from "@assets/generated_images/memento_mori_hands.jpg";
+import oracleWideBg from "@assets/generated_images/oracle_wide_bg.jpg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
@@ -627,13 +628,26 @@ export default function Home() {
               {/* Shadow plate */}
               <div className="absolute inset-0 translate-x-3 translate-y-4 bg-black/70 pointer-events-none" />
 
-              {/* Photo — object-contain so the FULL image is visible */}
+              {/* Composite: wide generated bg + original photo feathered in at center */}
               <div className="relative w-full h-full bg-[hsl(22_55%_4%)] overflow-hidden border border-primary/25">
+                {/* Wide desert background fills the full frame */}
+                <img
+                  src={oracleWideBg}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                />
+                {/* Warm grade over background */}
+                <div className="absolute inset-0 bg-[hsl(28_60%_10%/0.35)] mix-blend-multiply pointer-events-none" />
+                {/* Original portrait — centered, edges masked to blend into background */}
                 <img
                   src={profileBg}
                   alt="Oracle — golden hour desert"
-                  className="w-full h-full object-contain"
-                  style={{ objectPosition: "center" }}
+                  className="absolute inset-0 w-full h-full object-contain"
+                  style={{
+                    objectPosition: "center",
+                    maskImage: "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
+                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
+                  }}
                 />
 
                 {/* Cinematic sepia grade */}
