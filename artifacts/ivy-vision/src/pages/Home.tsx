@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import ivyLogo from "@assets/Untitled_design_1784941575772.jpeg";
+import duskPhoto from "@assets/IMG_8613_1784944861332.jpeg";
 import heroBg from "../assets/hero-bg.jpg";
 import loreBg from "../assets/lore.jpg";
 import musicBg from "../assets/music.jpg";
@@ -167,6 +168,61 @@ const VineDecoration = ({ className = "" }: { className?: string }) => (
     <path d="M50 250 Q 30 240 20 260" stroke="currentColor" strokeWidth="1.5" fill="none" />
   </svg>
 );
+
+const DuskDivider = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
+
+  return (
+    <div ref={ref} className="relative w-full h-[70vh] overflow-hidden">
+      {/* Parallax photo */}
+      <motion.div style={{ y }} className="absolute inset-[-10%] will-change-transform">
+        <img
+          src={duskPhoto}
+          alt="Dusk — crescent moon over ocean"
+          className="w-full h-full object-cover object-center"
+        />
+      </motion.div>
+
+      {/* Top fade */}
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent pointer-events-none z-10" />
+      {/* Bottom fade */}
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+      {/* Ambient colour overlay — teal tint to bridge the two palettes */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-[hsl(175_100%_10%/0.3)] pointer-events-none z-10 mix-blend-multiply" />
+
+      {/* Moon-glow orb centred on the real crescent in the photo */}
+      <div className="absolute top-[28%] left-[42%] w-24 h-24 rounded-full pointer-events-none z-20"
+        style={{ background: "radial-gradient(circle, hsl(210 20% 92% / 0.22) 0%, transparent 70%)", filter: "blur(8px)" }} />
+
+      {/* Quote overlay */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-30 px-6 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-2xl md:text-3xl text-white/90 max-w-xl leading-relaxed drop-shadow-[0_2px_24px_rgba(0,0,0,0.9)]"
+          style={{ textShadow: "0 0 40px hsl(25 90% 48% / 0.35), 0 2px 8px rgba(0,0,0,0.8)" }}
+        >
+          "Nothing lasts forever,<br />
+          <span style={{ color: "hsl(25 90% 65%)" }}>not even the dark."</span>
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="font-mono text-xs tracking-[0.4em] uppercase mt-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+          style={{ color: "hsl(25 90% 65% / 0.7)" }}
+        >
+          Nothing Lasts Forever — Estranged
+        </motion.p>
+      </div>
+    </div>
+  );
+};
 
 const FrequenciesSection = () => {
   const [active, setActive] = useState(0);
@@ -384,6 +440,8 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background z-10" />
           <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10" />
+          {/* Ember horizon warmth bleeding up from the dusk photograph palette */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[hsl(25_90%_48%/0.08)] to-transparent z-10 pointer-events-none" />
           <img src={heroBg} alt="Bioluminescent harbor" className="w-full h-full object-cover object-center opacity-40" />
         </motion.div>
         
@@ -504,7 +562,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 text-center relative z-20">
           <FadeIn>
             <Radio className="w-8 h-8 text-secondary mx-auto mb-8 opacity-50" />
-            <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-snug mb-12 text-transparent bg-clip-text bg-gradient-to-br from-white via-primary to-secondary drop-shadow-[0_0_15px_rgba(0,229,209,0.3)] italic">
+            <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-snug mb-12 text-transparent bg-clip-text bg-gradient-to-br from-[hsl(25_90%_75%)] via-primary to-secondary drop-shadow-[0_0_15px_rgba(0,229,209,0.3)] italic">
               <span className="not-italic opacity-40 text-3xl block mb-6 font-mono tracking-widest lowercase text-white/40 drop-shadow-none">"</span>
               Clenched in the gnarled fingers of the trees,<br/>
               bound upon a bed of thistled vines —<br/>
@@ -519,6 +577,9 @@ export default function Home() {
 
       {/* Poetry Archive */}
       <PoetryArchive />
+
+      {/* Dusk photograph — cinematic palette bridge */}
+      <DuskDivider />
 
       {/* Frequencies — real Spotify top tracks */}
       <FrequenciesSection />

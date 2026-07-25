@@ -110,6 +110,11 @@
   --accent: 28 77% 50%;
   --accent-foreground: 267 64% 11%;
 
+  /* Dusk palette pulled from the twilight photograph */
+  --ember:       25 90% 48%;   /* burning amber horizon glow   */
+  --dusk-slate:  220 28% 32%;  /* steel-blue upper sky         */
+  --moon-silver: 210 20% 82%;  /* crescent moon / ocean sheen  */
+
   --destructive: 0 84% 60%;
   --destructive-foreground: 267 64% 11%;
 
@@ -172,6 +177,10 @@
   --accent: 28 77% 50%;
   --accent-foreground: 267 64% 11%;
 
+  --ember:       25 90% 48%;
+  --dusk-slate:  220 28% 32%;
+  --moon-silver: 210 20% 82%;
+
   --destructive: 0 84% 60%;
   --destructive-foreground: 267 64% 11%;
 
@@ -205,8 +214,17 @@
   .text-glow-secondary {
     text-shadow: 0 0 20px hsl(var(--secondary) / 0.5), 0 0 40px hsl(var(--secondary) / 0.3);
   }
+  .text-glow-ember {
+    text-shadow: 0 0 20px hsl(var(--ember) / 0.6), 0 0 45px hsl(var(--ember) / 0.35);
+  }
   .box-glow {
     box-shadow: 0 0 30px hsl(var(--primary) / 0.2), inset 0 0 20px hsl(var(--primary) / 0.1);
+  }
+  .box-glow-ember {
+    box-shadow: 0 0 40px hsl(var(--ember) / 0.25), inset 0 0 20px hsl(var(--ember) / 0.1);
+  }
+  .ember-border {
+    border-color: hsl(var(--ember) / 0.3);
   }
   
   .glass-panel {
