@@ -7,6 +7,11 @@ import loreBg from "@assets/1_IMG_5010_1784945745561.jpeg";
 import musicBg from "@assets/0_IMG_8612_1784945745560.jpeg";
 import connectBg from "@assets/IMG_8613_1784944861332.jpeg";
 import profileBg from "@assets/IMG_8611_1784947359440.jpeg";
+// Generated artwork — Doré / alchemical / Memento Mori style
+import reaperForest from "@assets/generated_images/reaper_forest.jpg";
+import alchemicalChart from "@assets/generated_images/alchemical_chart.jpg";
+import descentThreshold from "@assets/generated_images/descent_threshold.jpg";
+import mementoMoriHands from "@assets/generated_images/memento_mori_hands.jpg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
@@ -558,10 +563,16 @@ export default function Home() {
       </Section>
 
       {/* Portal / Intro */}
-      <Section className="z-10 bg-swirl bg-gradient-to-br from-background via-muted/10 to-background relative">
+      <Section className="z-10 bg-swirl bg-gradient-to-br from-background via-muted/10 to-background relative overflow-hidden">
+        {/* Descent engraving — right edge, fading in */}
+        <div className="absolute right-0 top-0 h-full w-[45%] pointer-events-none z-0 opacity-20 mix-blend-luminosity">
+          <img src={descentThreshold} alt="" className="h-full w-full object-cover object-left" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />
+        </div>
         <VineDecoration className="top-0 left-0 h-full w-32 -translate-x-1/2" />
         <VineDecoration className="bottom-0 right-0 h-full w-32 translate-x-1/2 rotate-180" />
-        <div className="max-w-4xl mx-auto px-6 md:px-12 w-full relative">
+        <div className="max-w-4xl mx-auto px-6 md:px-12 w-full relative z-10">
           <div className="absolute -left-20 -top-20 w-64 h-64 bg-secondary/20 rounded-full blur-[120px] pointer-events-none" />
           
           <FadeIn>
@@ -594,6 +605,12 @@ export default function Home() {
 
       {/* Oracle / Lore — lost archive plate */}
       <Section className="z-10 bg-background overflow-hidden relative">
+        {/* Alchemical chart — left side watermark bleed */}
+        <div className="absolute left-0 top-0 h-full w-[40%] pointer-events-none z-0 opacity-15 mix-blend-luminosity">
+          <img src={alchemicalChart} alt="" className="h-full w-full object-cover object-right" />
+          <div className="absolute inset-0 bg-gradient-to-l from-background via-background/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />
+        </div>
         {/* Metatron's Cube watermark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
           <MetatronsCube className="w-[700px] h-[700px] text-primary opacity-[0.04] sacred-glow" />
@@ -666,6 +683,12 @@ export default function Home() {
 
       {/* Poetry Centerpiece — "Reaper" excerpt */}
       <Section className="z-10 py-32 relative overflow-hidden bg-background">
+        {/* Reaper forest engraving — full bleed background */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <img src={reaperForest} alt="" className="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+        </div>
         <VineDecoration className="top-20 left-10 h-[600px] w-48 text-secondary" />
         <VineDecoration className="bottom-20 right-10 h-[600px] w-48 text-secondary rotate-180" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[150px] pointer-events-none mix-blend-screen" />
@@ -758,6 +781,12 @@ export default function Home() {
           <div className="absolute inset-0 bg-[hsl(28_60%_10%/0.5)] mix-blend-multiply" />
         </div>
 
+        {/* Memento Mori hands — left side, tall */}
+        <div className="absolute left-0 top-0 h-full w-[35%] pointer-events-none z-0 opacity-25 mix-blend-luminosity">
+          <img src={mementoMoriHands} alt="" className="h-full w-full object-cover object-right" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-background/40 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/80" />
+        </div>
         {/* FlowerOfLife watermark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <FlowerOfLife className="w-[800px] h-[800px] text-primary opacity-[0.035] sacred-glow animate-spin-slow" style={{ animationDirection: "reverse" } as React.CSSProperties} />
