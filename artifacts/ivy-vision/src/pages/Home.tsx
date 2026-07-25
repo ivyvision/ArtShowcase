@@ -2107,15 +2107,17 @@ const PoetryScrollSection = () => (
       ]}
     />
     <PoetryPanel
-      img={gothicArch}  alt="Gothic arch — silhouette" align="left"  focal="center top"
-      source="Wholeness · Estranged"
+      img={gothicArch}  alt="Gothic arch — stone ruin" align="left"  focal="center top"
+      source="Night Nymph · Estranged"
       lines={[
-        "Until it is impossible",
-        "to hold on to the Self",
+        "Sheltered in a house that isn't mine",
         "",
-        "So I become a silhouette",
-        "And join the trees",
-        "in the skyline",
+        "Illusory prison of a",
+        "Labyrinthian mind",
+        "",
+        "Somehow both",
+        "Empty yet opulent",
+        "Godless & divine",
       ]}
     />
     <PoetryPanel
