@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "IvyVision"
+version = "1.0.0"
+id = "artifacts/ivy-vision"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23805
+
+[services.development]
+run = "pnpm --filter @workspace/ivy-vision run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ivy-vision", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ivy-vision/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23805"
+BASE_PATH = "/"
