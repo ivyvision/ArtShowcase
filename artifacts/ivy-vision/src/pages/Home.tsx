@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import ivyLogo from "@assets/Untitled_design_1784941575772.jpeg";
 import duskPhoto from "@assets/IMG_8613_1784944861332.jpeg";
 import heroBg from "@assets/IMG_20260623_193409_10_186_1784945099904.jpeg";
@@ -22,8 +22,14 @@ import gothicArch from "@assets/IMG_8649_1784957576757.jpeg";
 import darkFlower from "@assets/IMG_8659_1784957576757.jpeg";
 import wildflowerField from "@assets/IMG_8673_1784966063991.jpeg";
 import aboveCloudsWide from "@assets/IMG_8672_1784966063991.jpeg";
+import artEye from "@assets/IMG_8681_1784966175027.jpeg";
+import artPortrait1 from "@assets/IMG_8636_1784966175027.jpeg";
+import artBelieve from "@assets/IMG_8637_1784966175027.jpeg";
+import artIntense from "@assets/IMG_8674_1784966175027.jpeg";
+import artHell from "@assets/IMG_8675_1784966175027.jpeg";
+import artSketch6 from "@assets/IMG_8676_1784966175027.jpeg";
 
-import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
+import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Palette } from 'lucide-react';
 
 // Real top tracks from IvyVision's Spotify (fetched via Spotify Web API)
 const SPOTIFY_TRACKS = [
@@ -1764,6 +1770,242 @@ const FrequenciesSection = () => {
   );
 };
 
+const ARTWORKS = [
+  { img: artEye,       alt: "Eye reflection — charcoal & ink",         poem: { lines: ["I have met my inner monster", "& watched him weep"], source: "The Loss · Estranged" } },
+  { img: artPortrait1, alt: "Charcoal portrait — female face",          poem: { lines: ["She holds the gaze of someone", "who has outlasted grief"], source: "Inadequate · Estranged" } },
+  { img: artBelieve,   alt: "Believe What You See — graphite",          poem: { lines: ["Believe what you see", "not the story I stitched", "over the wound"], source: "The Cage · Estranged" } },
+  { img: artIntense,   alt: "Intense portrait with red accents",        poem: { lines: ["I am still arriving", "at the edge of what I can hold"], source: "Reaper · Estranged" } },
+  { img: artHell,      alt: "Hell Is For Children — charcoal",          poem: { lines: ["Hell is not a place", "it is the moment", "before you leave"], source: "Leave · Estranged" } },
+  { img: artSketch6,   alt: "Sixth artwork — graphite sketch",          poem: { lines: ["Nothing lasts forever", "but some things are worth", "carrying anyway"], source: "Nothing Lasts Forever · Estranged" } },
+];
+
+// Floating particle mote component
+const Mote = ({ index }: { index: number }) => {
+  const positions = [
+    { left: '12%', top: '22%' }, { left: '28%', top: '68%' }, { left: '72%', top: '18%' },
+    { left: '85%', top: '58%' }, { left: '50%', top: '80%' },
+  ];
+  const pos = positions[index % positions.length];
+  return (
+    <motion.div
+      className="absolute w-1 h-1 rounded-full pointer-events-none"
+      style={{
+        left: pos.left, top: pos.top,
+        background: `radial-gradient(circle, hsl(var(--primary) / 0.9), hsl(var(--primary) / 0))`,
+        width: index % 2 === 0 ? '3px' : '2px',
+        height: index % 2 === 0 ? '3px' : '2px',
+      }}
+      animate={{
+        y: [0, -(18 + index * 5), 0],
+        x: [0, index % 2 === 0 ? 7 : -7, 0],
+        opacity: [0, 0.75, 0],
+        scale: [0.4, 1.3, 0.4],
+      }}
+      transition={{
+        duration: 3.2 + index * 0.65,
+        repeat: Infinity,
+        delay: index * 0.55,
+        ease: 'easeInOut',
+      }}
+    />
+  );
+};
+
+const OriginalArtwork = () => {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const count = ARTWORKS.length;
+
+  // Auto-advance every 5 s, pause on hover/touch
+  useEffect(() => {
+    if (paused) return;
+    const t = setInterval(() => setCurrent(c => (c + 1) % count), 5000);
+    return () => clearInterval(t);
+  }, [paused, count]);
+
+  const go = (i: number) => setCurrent((i + count) % count);
+  const art = ARTWORKS[current];
+
+  return (
+    <section className="relative z-10 py-28 bg-background overflow-hidden">
+      {/* Deep ambient glow — breathes with the gem */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{ opacity: [1, 1.6, 1] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-primary/5 blur-[140px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full bg-secondary/5 blur-[90px]" />
+      </motion.div>
+
+      <VineDecoration className="absolute top-0 left-0 h-full w-24 text-primary opacity-10 scale-x-[-1]" />
+
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <FadeIn>
+          <div className="flex items-center gap-4 mb-16">
+            <Palette className="w-5 h-5 text-primary" />
+            <span className="font-mono text-primary text-sm uppercase tracking-widest">Original Artwork</span>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-primary/30 to-transparent" />
+          </div>
+        </FadeIn>
+
+        {/* Stage — prev ghost · gem · next ghost */}
+        <div
+          className="relative flex items-center justify-center gap-4 md:gap-8"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+        >
+          {/* Prev ghost */}
+          <button
+            onClick={() => go(current - 1)}
+            aria-label="Previous artwork"
+            className="hidden md:block flex-none cursor-pointer group"
+          >
+            <motion.div
+              className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg overflow-hidden border border-primary/10"
+              style={{ transform: 'perspective(700px) rotateY(18deg)', opacity: 0.28 }}
+              whileHover={{ opacity: 0.55, scale: 1.04 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img src={ARTWORKS[(current - 1 + count) % count].img} alt="" className="w-full h-full object-cover sepia-[0.5] brightness-40" />
+            </motion.div>
+          </button>
+
+          {/* ═══ The Hextech Gem ═══ */}
+          <div className="relative flex-none">
+            {/* Pulsing outer corona */}
+            <motion.div
+              className="absolute inset-[-20px] rounded-3xl pointer-events-none z-0"
+              animate={{
+                boxShadow: [
+                  '0 0 30px 6px hsl(var(--primary)/0.10), 0 0 90px 20px hsl(var(--primary)/0.04)',
+                  '0 0 55px 16px hsl(var(--primary)/0.22), 0 0 160px 50px hsl(var(--primary)/0.09)',
+                  '0 0 30px 6px hsl(var(--primary)/0.10), 0 0 90px 20px hsl(var(--primary)/0.04)',
+                ],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            {/* Second inner ring — crimson counter-phase */}
+            <motion.div
+              className="absolute inset-[-4px] rounded-2xl pointer-events-none z-0"
+              animate={{
+                boxShadow: [
+                  '0 0 0px 0px hsl(var(--secondary)/0.0)',
+                  '0 0 24px 6px hsl(var(--secondary)/0.14)',
+                  '0 0 0px 0px hsl(var(--secondary)/0.0)',
+                ],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+            />
+
+            {/* The floating crystal itself */}
+            <motion.div
+              animate={{
+                y: [0, -15, 0],
+                rotate: [-0.7, 0.7, -0.7],
+                scale: [1, 1.014, 1],
+              }}
+              transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[460px] lg:h-[460px] z-10"
+            >
+              {/* Corner sigil marks */}
+              {(['tl','tr','bl','br'] as const).map(c => (
+                <span key={c} className={`absolute z-20 w-5 h-5 pointer-events-none
+                  ${c === 'tl' ? 'top-3 left-3 border-t-2 border-l-2' : ''}
+                  ${c === 'tr' ? 'top-3 right-3 border-t-2 border-r-2' : ''}
+                  ${c === 'bl' ? 'bottom-3 left-3 border-b-2 border-l-2' : ''}
+                  ${c === 'br' ? 'bottom-3 right-3 border-b-2 border-r-2' : ''}
+                  border-primary/55`}
+                />
+              ))}
+
+              {/* Artwork crossfade */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  className="absolute inset-0 rounded-xl overflow-hidden border border-primary/25"
+                  initial={{ opacity: 0, scale: 0.94, filter: 'brightness(0.6)' }}
+                  animate={{ opacity: 1, scale: 1, filter: 'brightness(0.9)' }}
+                  exit={{ opacity: 0, scale: 1.05, filter: 'brightness(0.5)' }}
+                  transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <img src={art.img} alt={art.alt} className="w-full h-full object-cover sepia-[0.12]" />
+                  {/* Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/15 pointer-events-none" />
+                  {/* Inner glass sheen */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Poem lines — fade in after image */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`poem-${current}`}
+                  className="absolute bottom-0 left-0 right-0 p-5 md:p-7 z-20"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.65, delay: 0.45, ease: 'easeOut' }}
+                >
+                  {art.poem.lines.map((line, li) => (
+                    <p key={li} className="font-serif text-base md:text-lg text-foreground/92 leading-snug drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">{line}</p>
+                  ))}
+                  <p className="font-mono text-[9px] text-primary/55 tracking-[0.35em] uppercase mt-2">{art.poem.source}</p>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Floating light motes */}
+              {[0, 1, 2, 3, 4].map(i => <Mote key={i} index={i} />)}
+            </motion.div>
+          </div>
+
+          {/* Next ghost */}
+          <button
+            onClick={() => go(current + 1)}
+            aria-label="Next artwork"
+            className="hidden md:block flex-none cursor-pointer"
+          >
+            <motion.div
+              className="w-24 h-24 lg:w-32 lg:h-32 rounded-lg overflow-hidden border border-primary/10"
+              style={{ transform: 'perspective(700px) rotateY(-18deg)', opacity: 0.28 }}
+              whileHover={{ opacity: 0.55, scale: 1.04 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img src={ARTWORKS[(current + 1) % count].img} alt="" className="w-full h-full object-cover sepia-[0.5] brightness-40" />
+            </motion.div>
+          </button>
+        </div>
+
+        {/* Dot / dash indicators */}
+        <div className="flex justify-center items-center gap-2.5 mt-10">
+          {ARTWORKS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => go(i)}
+              aria-label={`Artwork ${i + 1}`}
+              className="transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-full"
+              style={{
+                width: i === current ? '24px' : '6px',
+                height: '6px',
+                background: i === current ? 'hsl(var(--primary))' : 'hsl(var(--primary)/0.2)',
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Mobile prev/next tap zones */}
+        <div className="flex justify-center gap-4 mt-6 md:hidden">
+          <button onClick={() => go(current - 1)} className="p-3 rounded-full border border-white/10 hover:border-primary/40 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"><ChevronLeft className="w-4 h-4" /></button>
+          <button onClick={() => go(current + 1)} className="p-3 rounded-full border border-white/10 hover:border-primary/40 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"><ChevronRight className="w-4 h-4" /></button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const PoetryArchive = () => {
   const [openChapter, setOpenChapter] = useState(0);
   const [active, setActive] = useState<{ ch: number; idx: number }>({ ch: 0, idx: 0 });
@@ -2333,6 +2575,9 @@ export default function Home() {
           </FadeIn>
         </div>
       </Section>
+
+      {/* Original Artwork */}
+      <OriginalArtwork />
 
       {/* Poetry Archive */}
       <PoetryArchive />
