@@ -29,7 +29,7 @@ import artIntense from "@assets/IMG_8674_1784966175027.jpeg";
 import artHell from "@assets/IMG_8675_1784966175027.jpeg";
 import artSketch6 from "@assets/IMG_8676_1784966175027.jpeg";
 
-import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Palette } from 'lucide-react';
+import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Palette, Mail } from 'lucide-react';
 
 // Real top tracks from IvyVision's Spotify (fetched via Spotify Web API)
 const SPOTIFY_TRACKS = [
@@ -2554,7 +2554,7 @@ export default function Home() {
             <div className="flex items-center justify-center gap-6">
               {[
                 { Icon: Instagram, href: "https://instagram.com/ivy.coconuts" },
-                { Icon: Twitter,   href: "#" },
+                { Icon: Mail,      href: "mailto:ivyvision@gmail.com" },
                 { Icon: Youtube,   href: "#" },
               ].map(({ Icon, href }, i) => (
                 <a key={i} href={href} target="_blank" rel="noopener noreferrer"
