@@ -2170,13 +2170,9 @@ const PoetryScrollSection = () => (
       lines={[
         "In all the places I find myself",
         "",
-        "The only thing that's always been there is the sky",
+        "The only thing that's always been there",
         "",
-        "That's why I excitedly point out clouds to friends",
-        "",
-        "And silently gaze up in reverence",
-        "",
-        "When I'm alone",
+        "Is the sky",
       ]}
     />
     <PoetryPanel
