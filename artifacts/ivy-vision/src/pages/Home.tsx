@@ -8,6 +8,45 @@ import connectBg from "../assets/connect.jpg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown } from 'lucide-react';
 
+// Real top tracks from IvyVision's Spotify (fetched via Spotify Web API)
+const SPOTIFY_TRACKS = [
+  {
+    name: "SMD!",
+    artist: "Saint Dillinger, T0xic Wa5te",
+    album: "Executive Dysfuntion",
+    albumArt: "https://i.scdn.co/image/ab67616d00001e021e48d94bcf9d6db773a02243",
+    spotifyUrl: "https://open.spotify.com/track/432GGLv47k7K4pvrDafEKs",
+  },
+  {
+    name: "Interfaith",
+    artist: "Public Memory",
+    album: "Wuthering Drum",
+    albumArt: "https://i.scdn.co/image/ab67616d00001e028902de52822d75d8874166f1",
+    spotifyUrl: "https://open.spotify.com/track/7ewt9oqi8kJX8EGeAsUbQg",
+  },
+  {
+    name: "A wild river to take you home",
+    artist: "Black Hill, Silent Island",
+    album: "Tales of the night forest",
+    albumArt: "https://i.scdn.co/image/ab67616d00001e02dfec08042d57781299cf8b73",
+    spotifyUrl: "https://open.spotify.com/track/0UFkbnxj34vZVgwwEDy29e",
+  },
+  {
+    name: "Circle With Me",
+    artist: "Spiritbox",
+    album: "Eternal Blue",
+    albumArt: "https://i.scdn.co/image/ab67616d00001e023e234c82f96fa4ded8e5ca47",
+    spotifyUrl: "https://open.spotify.com/track/3FI0iAAAjmR31xpZEwbdys",
+  },
+  {
+    name: "Rainforest Bird Songs",
+    artist: "Sleep Miracle",
+    album: "Bird Showers",
+    albumArt: "https://i.scdn.co/image/ab67616d00001e02a8abd24f8316037dbd296201",
+    spotifyUrl: "https://open.spotify.com/track/14jB7OqCZ395Oopbo6kVdk",
+  },
+];
+
 // Real poems from "Estranged" by Aiyana Noelani
 const POEMS = [
   {
@@ -128,6 +167,110 @@ const VineDecoration = ({ className = "" }: { className?: string }) => (
     <path d="M50 250 Q 30 240 20 260" stroke="currentColor" strokeWidth="1.5" fill="none" />
   </svg>
 );
+
+const FrequenciesSection = () => {
+  const [active, setActive] = useState(0);
+  const track = SPOTIFY_TRACKS[active];
+
+  return (
+    <section className="z-10 relative bg-background/50 backdrop-blur-3xl border-y border-white/5 py-32 overflow-hidden">
+      <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-20">
+        <FadeIn>
+          <h2 className="text-4xl md:text-6xl font-serif text-glow mb-4 flex items-center gap-6">
+            Frequencies
+            <Disc3 className="w-10 h-10 text-primary animate-spin" style={{ animationDuration: '4s' }} />
+          </h2>
+          <p className="font-mono text-xs text-muted-foreground/50 uppercase tracking-widest mb-16">
+            All-time top tracks · via Spotify
+          </p>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Featured album art card */}
+          <FadeIn delay={0.2} className="lg:col-span-5">
+            <motion.a
+              key={active}
+              href={track.spotifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="glass-panel rounded-3xl p-8 relative overflow-hidden group block"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="aspect-square rounded-2xl overflow-hidden mb-8 shadow-2xl relative">
+                  <img
+                    src={track.albumArt}
+                    alt={track.album}
+                    className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                    <span className="font-mono text-xs text-primary uppercase tracking-widest flex items-center gap-2">
+                      <Play className="w-3 h-3 fill-current" /> Open on Spotify
+                    </span>
+                  </div>
+                </div>
+                <h4 className="text-2xl font-serif font-bold text-foreground truncate">{track.name}</h4>
+                <p className="text-primary font-mono text-sm tracking-widest mt-1 truncate">{track.artist}</p>
+                <p className="text-muted-foreground/50 font-mono text-xs mt-1 truncate">{track.album}</p>
+              </div>
+            </motion.a>
+          </FadeIn>
+
+          {/* Tracklist */}
+          <FadeIn delay={0.4} className="lg:col-span-7">
+            <div className="space-y-2">
+              {SPOTIFY_TRACKS.map((t, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300 text-left group ${
+                    active === i
+                      ? "bg-primary/10 border border-primary/30 text-primary"
+                      : "hover:bg-white/5 text-muted-foreground hover:text-foreground border border-transparent"
+                  }`}
+                >
+                  {/* Thumbnail */}
+                  <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 relative">
+                    <img src={t.albumArt} alt={t.album} className="w-full h-full object-cover" />
+                    {active === i && (
+                      <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
+                        <Disc3 className="w-4 h-4 text-primary animate-spin" style={{ animationDuration: '2s' }} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif text-base truncate">{t.name}</p>
+                    <p className="font-mono text-xs opacity-60 truncate mt-0.5">{t.artist}</p>
+                  </div>
+                  <span className="font-mono text-xs opacity-30 group-hover:opacity-70 transition-opacity flex-shrink-0">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <a
+              href="https://open.spotify.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-3 text-secondary hover:text-secondary-foreground font-mono tracking-widest text-sm uppercase transition-colors group"
+            >
+              Open Spotify
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            </a>
+          </FadeIn>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const PoetryArchive = () => {
   const [active, setActive] = useState(0);
@@ -377,91 +520,8 @@ export default function Home() {
       {/* Poetry Archive */}
       <PoetryArchive />
 
-      {/* Music / Discography */}
-      <Section className="z-10 relative bg-background/50 backdrop-blur-3xl border-y border-white/5 py-32">
-        <div className="absolute right-0 top-0 w-1/2 h-full opacity-10">
-          <img src={musicBg} alt="Visualizer" className="w-full h-full object-cover mix-blend-screen" />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-20">
-          <FadeIn>
-            <h2 className="text-4xl md:text-6xl font-serif text-glow mb-16 flex items-center gap-6">
-              Frequencies
-              <Disc3 className="w-10 h-10 text-primary animate-spin" style={{ animationDuration: '4s' }} />
-            </h2>
-          </FadeIn>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Player UI */}
-            <FadeIn delay={0.2} className="lg:col-span-5">
-              <div className="glass-panel rounded-3xl p-8 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10">
-                  <div className="aspect-square rounded-2xl overflow-hidden mb-8 shadow-2xl relative">
-                    <img src={musicBg} alt="Album Art" className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" />
-                    <div className="absolute inset-0 border-4 border-background/20 mix-blend-overlay rounded-2xl pointer-events-none" />
-                  </div>
-                  
-                  <div className="mb-6">
-                    <h4 className="text-2xl font-serif font-bold text-foreground">Bioluminescent Decay</h4>
-                    <p className="text-primary font-mono text-sm tracking-widest mt-1">EP • 2024</p>
-                  </div>
-                  
-                  {/* Fake Progress */}
-                  <div className="w-full h-1 bg-white/10 rounded-full mb-6 overflow-hidden">
-                    <div className="h-full bg-primary w-1/3 relative">
-                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_10px_rgba(0,229,209,1)]" />
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <button className="p-3 text-white/50 hover:text-white transition-colors">
-                      <Rewind className="w-6 h-6" />
-                    </button>
-                    <button className="p-5 bg-primary text-background rounded-full hover:scale-105 hover:shadow-[0_0_20px_rgba(0,229,209,0.5)] transition-all">
-                      <Play className="w-8 h-8 fill-current ml-1" />
-                    </button>
-                    <button className="p-3 text-white/50 hover:text-white transition-colors">
-                      <FastForward className="w-6 h-6" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Tracklist */}
-            <FadeIn delay={0.4} className="lg:col-span-7">
-              <div className="space-y-2">
-                {[
-                  { num: "01", title: "Submerged Overpass", time: "4:12" },
-                  { num: "02", title: "Neon Vines (ft. Cryptid)", time: "3:45", active: true },
-                  { num: "03", title: "Oracle of the Harbor", time: "5:30" },
-                  { num: "04", title: "Bruised Magenta Sky", time: "2:58" },
-                  { num: "05", title: "The Last Ember", time: "6:15" },
-                ].map((track) => (
-                  <div 
-                    key={track.num}
-                    className={`flex items-center p-4 rounded-xl cursor-pointer transition-all duration-300 ${
-                      track.active 
-                        ? "bg-primary/10 border border-primary/30 text-primary" 
-                        : "hover:bg-white/5 text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    <span className="font-mono text-sm w-12 opacity-50">{track.num}</span>
-                    <span className="font-serif text-lg flex-1">{track.title}</span>
-                    <span className="font-mono text-sm opacity-50">{track.time}</span>
-                  </div>
-                ))}
-              </div>
-              <button className="mt-8 flex items-center gap-3 text-secondary hover:text-secondary-foreground font-mono tracking-widest text-sm uppercase transition-colors group">
-                Listen on all platforms 
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-              </button>
-            </FadeIn>
-          </div>
-        </div>
-      </Section>
+      {/* Frequencies — real Spotify top tracks */}
+      <FrequenciesSection />
 
       {/* Visuals / Artifacts */}
       <Section className="z-10 py-32 bg-background relative overflow-hidden">
