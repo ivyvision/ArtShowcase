@@ -2500,11 +2500,11 @@ export default function Home() {
           
           <FadeIn delay={0.2}>
             <div className="flex flex-col md:flex-row gap-12 items-start mt-12">
-              <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-xl">
+              <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed md:flex-1 md:min-w-0">
                 The trees forget their individuality and join with the horizon into a single organism, drawing millions of breaths as one — with the power to pull the wind out of the valley, and the air out of my sun-gold body.
               </p>
               
-              <div className="flex-1 w-full glass-panel p-8 rounded-2xl relative overflow-hidden group">
+              <div className="w-full md:flex-1 md:min-w-0 glass-panel p-8 rounded-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <h3 className="font-mono text-primary text-sm uppercase tracking-widest mb-4">Latest Transmission</h3>
                 <p className="font-serif text-2xl italic text-foreground/90 leading-relaxed">
