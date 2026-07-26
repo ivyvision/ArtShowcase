@@ -1670,14 +1670,14 @@ const DuskDivider = () => {
 
 const EVENTS = [
   {
-    name: "Feral Tendencies",
-    logo: feralTendenciesLogo,
-    url: "https://feral-tendencies-showcase.replit.app/",
-  },
-  {
     name: "Infinite Cypher",
     logo: infiniteCypherLogo,
     url: "https://infinitecypher.org",
+  },
+  {
+    name: "Feral Tendencies",
+    logo: feralTendenciesLogo,
+    url: "https://feral-tendencies-showcase.replit.app/",
   },
 ];
 
