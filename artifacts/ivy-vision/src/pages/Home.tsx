@@ -29,7 +29,7 @@ import artIntense from "@assets/IMG_8674_1784966175027.jpeg";
 import artHell from "@assets/IMG_8675_1784966175027.jpeg";
 import artSketch6 from "@assets/IMG_8676_1784966175027.jpeg";
 import infiniteCypherLogo from "@assets/infinite_cypher.png";
-import feralTendenciesLogo from "@assets/feral_tendencies.jpeg";
+import feralTendenciesLogo from "@assets/feral_tendencies_no_bg.png";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Palette, Mail } from 'lucide-react';
 
@@ -1925,6 +1925,51 @@ const OriginalArtwork = () => {
   );
 };
 
+const EventLogos = () => {
+  const [idx, setIdx] = useState(0);
+  const event = EVENTS[idx];
+  return (
+    <div className="hidden lg:flex flex-col gap-5 mt-12 items-start">
+      <AnimatePresence mode="wait">
+        <motion.a
+          key={idx}
+          href={event.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={event.name}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 10 }}
+          transition={{ duration: 0.35 }}
+          className="group"
+        >
+          <img
+            src={event.logo}
+            alt={event.name}
+            className="w-28 h-28 object-contain drop-shadow-[0_0_12px_rgba(180,120,60,0.4)] group-hover:drop-shadow-[0_0_22px_rgba(180,120,60,0.75)] transition-all duration-500 group-hover:scale-105 opacity-60 group-hover:opacity-100"
+          />
+        </motion.a>
+      </AnimatePresence>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={() => setIdx((i) => (i - 1 + EVENTS.length) % EVENTS.length)}
+          className="p-1.5 rounded-full border border-white/10 hover:border-primary/40 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
+          aria-label="Previous event"
+        >
+          <ChevronLeft className="w-3 h-3" />
+        </button>
+        <button
+          onClick={() => setIdx((i) => (i + 1) % EVENTS.length)}
+          className="p-1.5 rounded-full border border-white/10 hover:border-primary/40 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
+          aria-label="Next event"
+        >
+          <ChevronRight className="w-3 h-3" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const PoetryArchive = () => {
   const [openChapter, setOpenChapter] = useState(0);
   const [active, setActive] = useState<{ ch: number; idx: number }>({ ch: 0, idx: 0 });
@@ -1963,6 +2008,7 @@ const PoetryArchive = () => {
           {/* Chapter / poem selector */}
           <FadeIn>
             <nav className="flex flex-col" aria-label="Poetry chapters">
+
               {CHAPTERS.map((ch, ci) => {
                 const isOpen = openChapter === ci;
                 const hasActive = active.ch === ci;
@@ -2007,6 +2053,9 @@ const PoetryArchive = () => {
                 );
               })}
             </nav>
+
+            {/* Event logos — landscape/desktop only, one at a time with arrow nav */}
+            <EventLogos />
           </FadeIn>
 
           {/* Poem display */}
@@ -2567,9 +2616,6 @@ export default function Home() {
 
       {/* Frequencies — real Spotify top tracks */}
       <FrequenciesSection />
-
-      {/* Events */}
-      <EventsSection />
 
       {/* The Relics — cinematic poetry scroll */}
       <PoetryScrollSection />
