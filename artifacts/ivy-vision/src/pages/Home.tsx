@@ -1673,54 +1673,89 @@ const EVENTS = [
     name: "Infinite Cypher",
     logo: infiniteCypherLogo,
     url: "https://infinitecypher.org",
-    logoStyle: "object-contain",
   },
   {
     name: "Feral Tendencies",
     logo: feralTendenciesLogo,
     url: "https://feral-tendencies-showcase.replit.app/",
-    logoStyle: "object-cover",
   },
 ];
 
-const EventsSection = () => (
-  <section className="z-10 relative bg-background border-y border-white/5 py-24 overflow-hidden">
-    {/* Subtle ambient */}
-    <div className="absolute inset-0 pointer-events-none"
-      style={{ background: "radial-gradient(ellipse at 50% 60%, hsl(22 60% 8% / 0.6) 0%, transparent 70%)" }} />
+const EventsSection = () => {
+  const [idx, setIdx] = useState(0);
+  const event = EVENTS[idx];
+  return (
+    <section className="z-10 relative bg-background border-y border-white/5 py-20 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at 50% 60%, hsl(22 60% 8% / 0.5) 0%, transparent 70%)" }} />
 
-    <div className="max-w-5xl mx-auto px-6 md:px-12 w-full relative z-10">
-      <FadeIn className="text-center mb-16">
-        <h2 className="text-4xl md:text-6xl font-serif text-glow">Events</h2>
-      </FadeIn>
+      <div className="relative z-10 flex flex-col items-center gap-10 px-6">
+        {/* Header */}
+        <FadeIn>
+          <h2 className="text-4xl md:text-6xl font-serif text-glow text-center">Events</h2>
+        </FadeIn>
 
-      <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
-        {EVENTS.map((event) => (
-          <FadeIn key={event.name}>
-            <a
-              href={event.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-4"
-              aria-label={event.name}
-            >
-              <div className="w-40 h-40 md:w-52 md:h-52 rounded-2xl overflow-hidden flex items-center justify-center bg-white/5 border border-white/10 transition-all duration-500 group-hover:border-primary/40 group-hover:shadow-[0_0_40px_rgba(180,120,60,0.25)] group-hover:scale-105">
-                <img
-                  src={event.logo}
-                  alt={event.name}
-                  className={`w-full h-full ${event.logoStyle} transition-all duration-500 group-hover:brightness-110`}
-                />
-              </div>
-              <span className="font-mono text-xs tracking-widest text-muted-foreground/50 uppercase group-hover:text-primary transition-colors duration-300">
-                {event.name}
-              </span>
-            </a>
-          </FadeIn>
-        ))}
+        {/* Logo — full presence, centered */}
+        <AnimatePresence mode="wait">
+          <motion.a
+            key={idx}
+            href={event.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={event.name}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.92 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="group block"
+            style={{ width: "min(80vw, 480px)" }}
+          >
+            <img
+              src={event.logo}
+              alt={event.name}
+              className="w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(180,120,60,0.35)] group-hover:drop-shadow-[0_0_60px_rgba(180,120,60,0.65)] transition-all duration-500 group-hover:scale-105"
+            />
+          </motion.a>
+        </AnimatePresence>
+
+        {/* Event name */}
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`name-${idx}`}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
+            className="font-mono text-sm tracking-[0.3em] text-primary/60 uppercase"
+          >
+            {event.name}
+          </motion.p>
+        </AnimatePresence>
+
+        {/* Arrow navigation */}
+        <div className="flex items-center gap-6">
+          <button
+            onClick={() => setIdx((i) => (i - 1 + EVENTS.length) % EVENTS.length)}
+            className="p-3 rounded-full border border-white/10 hover:border-primary/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
+            aria-label="Previous event"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <span className="font-mono text-xs text-muted-foreground/30 tracking-widest">
+            {idx + 1} / {EVENTS.length}
+          </span>
+          <button
+            onClick={() => setIdx((i) => (i + 1) % EVENTS.length)}
+            className="p-3 rounded-full border border-white/10 hover:border-primary/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
+            aria-label="Next event"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const FrequenciesSection = () => {
   const [active, setActive] = useState(0);
