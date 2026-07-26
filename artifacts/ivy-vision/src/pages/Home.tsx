@@ -1670,9 +1670,9 @@ const DuskDivider = () => {
 
 /* ── Charter Panel — Old Kingdom rune marks, symmetrical side columns ── */
 const CharterPanel = ({ flip = false }: { flip?: boolean }) => {
-  const amber = "#d4922a";
-  const gold  = "#e8a840";
-  const glow  = "#f0b850";
+  const amber = "#c05518";   // burnt orange — Clariel charter-mark base
+  const gold  = "#e86820";   // fiery orange — inner mark strokes
+  const glow  = "#ffaa50";   // bright flame tip — centre dots
 
   const ticks = (cx: number, cy: number, r: number, count: number, majorEvery = 3) =>
     Array.from({ length: count }, (_, i) => {
@@ -2662,8 +2662,8 @@ export default function Home() {
               {/* Shadow plate */}
               <div className="absolute inset-0 translate-x-3 translate-y-4 bg-black/70 pointer-events-none" />
 
-              {/* Composite: dark base + charter panels + portrait centred */}
-              <div className="relative w-full h-full bg-[hsl(22_45%_3%)] overflow-hidden border border-primary/25">
+              {/* Composite: Clariel stormy-slate base + charter panels + portrait centred */}
+              <div className="relative w-full h-full bg-[hsl(218_35%_6%)] overflow-hidden border border-primary/25">
 
                 {/* ── Left Charter Panel ── */}
                 <div
