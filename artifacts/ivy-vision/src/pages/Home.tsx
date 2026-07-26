@@ -2029,7 +2029,7 @@ const PoetryPanel = ({
   const justifyClass = valign === "top" ? "justify-start pt-16" : valign === "bottom" ? "justify-end pb-16" : "justify-center";
 
   return (
-    <div ref={ref} className="relative w-full h-screen overflow-hidden">
+    <div ref={ref} className="relative w-full h-screen lg:h-[140vh] overflow-hidden">
       {/* Parallax photo */}
       <motion.div style={{ y: photoY }} className="absolute inset-[-12%] will-change-transform">
         <img src={img} alt={alt} className="w-full h-full object-cover" style={{ objectPosition: focal }} />
@@ -2084,7 +2084,7 @@ const PoetryPanel = ({
 const PoetryScrollSection = () => (
   <section className="z-10 relative">
     <PoetryPanel
-      img={loreBg}      alt="Night — red dress"   align="left"   focal="center top" valign="top"
+      img={loreBg}      alt="Night — red dress"   align="left"   focal="center 35%" valign="top"
       source="Reaper · Estranged"
       lines={[
         "Looking up to watch",
