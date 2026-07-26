@@ -28,7 +28,7 @@ import artBelieve from "@assets/IMG_8637_1784966175027.jpeg";
 import artIntense from "@assets/IMG_8674_1784966175027.jpeg";
 import artHell from "@assets/IMG_8675_1784966175027.jpeg";
 import artSketch6 from "@assets/IMG_8676_1784966175027.jpeg";
-import infiniteCypherLogo from "@assets/infinite_cypher_original.jpeg";
+import infiniteCypherLogo from "@assets/infinite_cypher_screen.png";
 import feralTendenciesLogo from "@assets/feral_tendencies_real.png";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Palette, Mail } from 'lucide-react';
@@ -1716,9 +1716,7 @@ const EventsSection = () => {
               src={event.logo}
               alt={event.name}
               className="w-full h-auto object-contain transition-all duration-500"
-              style={isIC ? { mixBlendMode: "screen" } : {
-                filter: "drop-shadow(0 0 40px rgba(180,120,60,0.35))",
-              }}
+              style={!isIC ? { filter: "drop-shadow(0 0 40px rgba(180,120,60,0.35))" } : undefined}
             />
           </motion.a>
         </AnimatePresence>
