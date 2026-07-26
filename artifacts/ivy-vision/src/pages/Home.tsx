@@ -2041,11 +2041,13 @@ const PoetryPanel = ({
   const justifyClass = valign === "top" ? "justify-start pt-16" : valign === "bottom" ? "justify-end pb-16" : "justify-center";
 
   return (
-    <div ref={ref} className="relative w-full h-screen lg:h-[140vh] overflow-hidden">
-      {/* Parallax photo */}
-      <motion.div style={{ y: photoY }} className="absolute inset-[-12%] will-change-transform">
-        <img src={img} alt={alt} className="w-full h-full object-cover" style={{ objectPosition: focal }} />
-      </motion.div>
+    <div ref={ref} className="relative w-full overflow-hidden">
+      {/* Photo — full natural height so nothing is cropped */}
+      <img
+        src={img}
+        alt={alt}
+        className="w-full h-auto block"
+      />
 
       {/* Cinematic overlays */}
       <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-background/60 pointer-events-none z-10" />
@@ -2054,9 +2056,9 @@ const PoetryPanel = ({
       <div className="absolute inset-0 pointer-events-none z-10"
         style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, hsl(22 55% 3% / 0.7) 100%)" }} />
 
-      {/* Poem text — drifts opposite to photo */}
+      {/* Poem text — centered over the image */}
       <motion.div
-        style={{ opacity, y: textY }}
+        style={{ opacity }}
         className={`absolute inset-0 z-20 flex flex-col ${justifyClass} gap-4 px-4 ${alignClass}`}
       >
         {/* Source label */}
