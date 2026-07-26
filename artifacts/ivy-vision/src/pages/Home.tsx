@@ -1670,100 +1670,115 @@ const FrequenciesSection = () => {
   const [active, setActive] = useState(0);
   const track = SPOTIFY_TRACKS[active];
 
+  // Extract track ID from spotifyUrl for the embed
+  const trackId = track.spotifyUrl.split("/track/")[1]?.split("?")[0];
+  const embedUrl = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`;
+
   return (
-    <section className="z-10 relative bg-background/50 backdrop-blur-3xl border-y border-white/5 py-32 overflow-hidden">
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background" />
+    <section className="z-10 relative bg-background/50 backdrop-blur-3xl border-y border-white/5 py-24 md:py-36 overflow-hidden">
+      {/* Ambient glow from album art color */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          key={active}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.18 }}
+          transition={{ duration: 1 }}
+          className="absolute left-1/2 top-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px] bg-primary"
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-20">
-        <FadeIn>
-          <h2 className="text-4xl md:text-6xl font-serif text-glow mb-4 flex items-center gap-6">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 w-full relative z-20">
+        {/* Header */}
+        <FadeIn className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-serif text-glow mb-4 flex items-center justify-center gap-5">
             Frequencies
-            <Disc3 className="w-10 h-10 text-primary animate-spin" style={{ animationDuration: '4s' }} />
+            <Disc3 className="w-9 h-9 text-primary animate-spin" style={{ animationDuration: '4s' }} />
           </h2>
-          <p className="font-mono text-xs text-muted-foreground/50 uppercase tracking-widest mb-16">
-            All-time top tracks · via Spotify
+          <p className="font-mono text-xs text-muted-foreground/50 uppercase tracking-widest">
+            Frequencies that move through me · via Spotify
           </p>
         </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Featured album art card */}
-          <FadeIn delay={0.2} className="lg:col-span-5">
-            <motion.a
+        {/* Featured album art + embed — big centered feature */}
+        <div className="flex flex-col items-center gap-8">
+          <AnimatePresence mode="wait">
+            <motion.div
               key={active}
-              href={track.spotifyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="glass-panel rounded-3xl p-8 relative overflow-hidden group block"
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.96 }}
+              transition={{ duration: 0.45 }}
+              className="w-full max-w-sm"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative z-10">
-                <div className="aspect-square rounded-2xl overflow-hidden mb-8 shadow-2xl relative">
-                  <img
-                    src={track.albumArt}
-                    alt={track.album}
-                    className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                    <span className="font-mono text-xs text-primary uppercase tracking-widest flex items-center gap-2">
-                      <Play className="w-3 h-3 fill-current" /> Open on Spotify
-                    </span>
-                  </div>
-                </div>
-                <h4 className="text-2xl font-serif font-bold text-foreground truncate">{track.name}</h4>
-                <p className="text-primary font-mono text-sm tracking-widest mt-1 truncate">{track.artist}</p>
-                <p className="text-muted-foreground/50 font-mono text-xs mt-1 truncate">{track.album}</p>
+              {/* Album art */}
+              <div className="aspect-square rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(180,120,60,0.25)] mb-6 relative">
+                <img
+                  src={track.albumArt}
+                  alt={track.album}
+                  className="w-full h-full object-cover"
+                />
+                {/* Subtle inner vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
               </div>
-            </motion.a>
-          </FadeIn>
 
-          {/* Tracklist */}
-          <FadeIn delay={0.4} className="lg:col-span-7">
-            <div className="space-y-2">
-              {SPOTIFY_TRACKS.map((t, i) => (
+              {/* Track meta */}
+              <div className="text-center mb-6">
+                <h4 className="text-2xl md:text-3xl font-serif text-foreground mb-1">{track.name}</h4>
+                <p className="text-primary font-mono text-sm tracking-widest">{track.artist}</p>
+                <p className="text-muted-foreground/40 font-mono text-xs mt-1">{track.album}</p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Spotify embed player */}
+          <div className="w-full max-w-xl">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`embed-${active}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="rounded-2xl overflow-hidden shadow-lg"
+              >
+                <iframe
+                  src={embedUrl}
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  style={{ borderRadius: '16px' }}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Track selector — thumbnail strip */}
+          <div className="flex items-center gap-3 mt-4 flex-wrap justify-center">
+            {SPOTIFY_TRACKS.map((t, i) => {
+              const tId = t.spotifyUrl.split("/track/")[1]?.split("?")[0];
+              return (
                 <button
                   key={i}
                   onClick={() => setActive(i)}
-                  className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300 text-left group ${
+                  title={`${t.name} — ${t.artist}`}
+                  className={`relative rounded-xl overflow-hidden transition-all duration-300 flex-shrink-0 ${
                     active === i
-                      ? "bg-primary/10 border border-primary/30 text-primary"
-                      : "hover:bg-white/5 text-muted-foreground hover:text-foreground border border-transparent"
+                      ? "w-16 h-16 ring-2 ring-primary ring-offset-2 ring-offset-background shadow-[0_0_20px_rgba(180,120,60,0.5)] scale-110"
+                      : "w-12 h-12 opacity-40 hover:opacity-80 hover:scale-105"
                   }`}
                 >
-                  {/* Thumbnail */}
-                  <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 relative">
-                    <img src={t.albumArt} alt={t.album} className="w-full h-full object-cover" />
-                    {active === i && (
-                      <div className="absolute inset-0 bg-primary/30 flex items-center justify-center">
-                        <Disc3 className="w-4 h-4 text-primary animate-spin" style={{ animationDuration: '2s' }} />
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-serif text-base truncate">{t.name}</p>
-                    <p className="font-mono text-xs opacity-60 truncate mt-0.5">{t.artist}</p>
-                  </div>
-                  <span className="font-mono text-xs opacity-30 group-hover:opacity-70 transition-opacity flex-shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  <img src={t.albumArt} alt={t.name} className="w-full h-full object-cover" />
+                  {active === i && (
+                    <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
+                      <Disc3 className="w-4 h-4 text-primary animate-spin" style={{ animationDuration: '2s' }} />
+                    </div>
+                  )}
                 </button>
-              ))}
-            </div>
-
-            <a
-              href="https://open.spotify.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-3 text-secondary hover:text-secondary-foreground font-mono tracking-widest text-sm uppercase transition-colors group"
-            >
-              Open Spotify
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-            </a>
-          </FadeIn>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
