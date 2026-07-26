@@ -1694,9 +1694,6 @@ const FrequenciesSection = () => {
             Frequencies
             <Disc3 className="w-9 h-9 text-primary animate-spin" style={{ animationDuration: '4s' }} />
           </h2>
-          <p className="font-mono text-xs text-muted-foreground/50 uppercase tracking-widest">
-            Frequencies that move through me · via Spotify
-          </p>
         </FadeIn>
 
         {/* Featured album art + embed — big centered feature */}
