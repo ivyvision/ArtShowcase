@@ -1929,7 +1929,7 @@ const EventLogos = () => {
   const [idx, setIdx] = useState(0);
   const event = EVENTS[idx];
   return (
-    <div className="hidden lg:flex flex-col gap-5 mt-12 items-start">
+    <div className="flex flex-col gap-5 items-start">
       <AnimatePresence mode="wait">
         <motion.a
           key={idx}
@@ -2062,7 +2062,7 @@ const PoetryArchive = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="glass-panel rounded-2xl p-10 md:p-14 relative overflow-hidden min-h-[340px]"
+            className="glass-panel rounded-2xl p-10 md:p-14 relative min-h-[340px]"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
 
@@ -2116,10 +2116,6 @@ const PoetryArchive = () => {
               </button>
             </div>
 
-            {/* Event logos — landscape/desktop only, sit in the blank space below poem text */}
-            <div className="hidden lg:block mt-12">
-              <EventLogos />
-            </div>
           </motion.div>
         </div>
       </div>
@@ -2129,10 +2125,10 @@ const PoetryArchive = () => {
 
 /* ── Poetry Scroll — one panel per photo ── */
 const PoetryPanel = ({
-  img, alt, align, lines, source, focal = "center", valign = "center",
+  img, alt, align, lines, source, focal = "center", valign = "center", showEvents = false,
 }: {
   img: string; alt: string; align: "left" | "center" | "right";
-  lines: string[]; source: string; focal?: string; valign?: "top" | "center" | "bottom";
+  lines: string[]; source: string; focal?: string; valign?: "top" | "center" | "bottom"; showEvents?: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -2163,6 +2159,13 @@ const PoetryPanel = ({
       {/* Vignette edges */}
       <div className="absolute inset-0 pointer-events-none z-10"
         style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, hsl(22 55% 3% / 0.7) 100%)" }} />
+
+      {/* Event logos — right half, landscape/desktop only */}
+      {showEvents && (
+        <div className="hidden lg:flex absolute inset-0 z-20 items-end justify-end pb-16 pr-16">
+          <EventLogos />
+        </div>
+      )}
 
       {/* Poem text — centered over the image */}
       <motion.div
@@ -2265,7 +2268,7 @@ const PoetryScrollSection = () => (
       ]}
     />
     <PoetryPanel
-      img={aboveClouds} alt="Above the clouds"       align="left"   focal="center"
+      img={aboveClouds} alt="Above the clouds"       align="left"   focal="center"  showEvents
       source="Starlight · Estranged"
       lines={[
         "Held in place",
