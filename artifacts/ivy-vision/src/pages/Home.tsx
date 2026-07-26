@@ -1670,9 +1670,9 @@ const DuskDivider = () => {
 
 /* ── Charter Panel — Old Kingdom rune marks, symmetrical side columns ── */
 const CharterPanel = ({ flip = false }: { flip?: boolean }) => {
-  const amber = "#c05518";   // burnt orange — Clariel charter-mark base
-  const gold  = "#e86820";   // fiery orange — inner mark strokes
-  const glow  = "#ffaa50";   // bright flame tip — centre dots
+  const amber = "#c43200";   // deep red-orange — Clariel fire base
+  const gold  = "#ff5a00";   // vivid flame orange — inner marks
+  const glow  = "#ffe060";   // bright flame tip — centre dots
 
   const ticks = (cx: number, cy: number, r: number, count: number, majorEvery = 3) =>
     Array.from({ length: count }, (_, i) => {
@@ -1715,74 +1715,68 @@ const CharterPanel = ({ flip = false }: { flip?: boolean }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
-      style={flip ? { transform: "scaleX(-1)" } : {}}
+      style={{
+        ...(flip ? { transform: "scaleX(-1)" } : {}),
+        filter: "drop-shadow(0 0 5px #ff5a00) drop-shadow(0 0 12px rgba(196,50,0,0.8))",
+      }}
       aria-hidden="true"
     >
       {/* Vertical spine */}
-      <line x1="80" y1="0" x2="80" y2="520" stroke={amber} strokeOpacity="0.12" strokeWidth="1" />
+      <line x1="80" y1="0" x2="80" y2="520" stroke={amber} strokeOpacity="0.45" strokeWidth="1" />
 
       {/* Top corner bracket */}
-      <path d="M14 10 L14 28 L32 28" stroke={amber} strokeOpacity="0.55" strokeWidth="1.2" />
-      <path d="M146 10 L146 28 L128 28" stroke={amber} strokeOpacity="0.55" strokeWidth="1.2" />
+      <path d="M14 10 L14 28 L32 28" stroke={amber} strokeOpacity="0.9" strokeWidth="1.4" />
+      <path d="M146 10 L146 28 L128 28" stroke={amber} strokeOpacity="0.9" strokeWidth="1.4" />
 
-      {/* ── Mark I — Binding / Spirit (top) ── */}
-      {/* Outer ring */}
-      <circle cx="80" cy="105" r="46" stroke={amber} strokeOpacity="0.5" strokeWidth="1.3" />
-      {/* Inner ring */}
-      <circle cx="80" cy="105" r="34" stroke={amber} strokeOpacity="0.2" strokeWidth="0.6" />
-      {/* Upward triangle — air / spirit */}
-      <path d="M80 72 L110 125 L50 125 Z" stroke={gold} strokeOpacity="0.65" strokeWidth="1.1" />
-      {/* Inner dot */}
-      <circle cx="80" cy="105" r="4" fill={glow} fillOpacity="0.85" />
-      {/* Horizontal crossbar through triangle */}
-      <line x1="57" y1="105" x2="103" y2="105" stroke={gold} strokeOpacity="0.3" strokeWidth="0.7" />
+      {/* ── Mark I — Spirit (top) ── */}
+      <circle cx="80" cy="105" r="46" stroke={amber} strokeOpacity="0.85" strokeWidth="1.5" />
+      <circle cx="80" cy="105" r="34" stroke={amber} strokeOpacity="0.45" strokeWidth="0.8" />
+      <path d="M80 72 L110 125 L50 125 Z" stroke={gold} strokeOpacity="1" strokeWidth="1.4" />
+      <circle cx="80" cy="105" r="4" fill={glow} fillOpacity="1" />
+      <line x1="57" y1="105" x2="103" y2="105" stroke={gold} strokeOpacity="0.65" strokeWidth="0.9" />
       {ticks(80, 105, 46, 16, 4)}
 
-      {/* Rune row between mark I and II */}
-      <text x="80" y="172" textAnchor="middle" fill={amber} fillOpacity="0.45" fontSize="9" fontFamily="serif" letterSpacing="4">ᚠ ᛁ ᚱ</text>
-      <line x1="24" y1="180" x2="136" y2="180" stroke={amber} strokeOpacity="0.18" strokeWidth="0.5" />
+      {/* Rune row I→II */}
+      <text x="80" y="172" textAnchor="middle" fill={gold} fillOpacity="0.8" fontSize="9" fontFamily="serif" letterSpacing="4">ᚠ ᛁ ᚱ</text>
+      <line x1="24" y1="180" x2="136" y2="180" stroke={amber} strokeOpacity="0.5" strokeWidth="0.6" />
 
       {/* ── Mark II — Charter Seal / Fire (centre) ── */}
-      <circle cx="80" cy="260" r="52" stroke={amber} strokeOpacity="0.55" strokeWidth="1.5" />
-      <circle cx="80" cy="260" r="40" stroke={amber} strokeOpacity="0.2" strokeWidth="0.6" />
-      {/* Six-pointed star (hexagram) — Old Kingdom charter seal */}
-      <path d="M80 218 L95 244 L125 244 L105 264 L115 292 L80 275 L45 292 L55 264 L35 244 L65 244 Z" stroke={gold} strokeOpacity="0.6" strokeWidth="1" />
-      {/* Inner hexagon centre */}
-      <circle cx="80" cy="260" r="12" stroke={gold} strokeOpacity="0.35" strokeWidth="0.8" />
-      <circle cx="80" cy="260" r="4.5" fill={glow} fillOpacity="0.9" />
+      <circle cx="80" cy="260" r="52" stroke={amber} strokeOpacity="0.9" strokeWidth="1.8" />
+      <circle cx="80" cy="260" r="40" stroke={amber} strokeOpacity="0.45" strokeWidth="0.8" />
+      <path d="M80 218 L95 244 L125 244 L105 264 L115 292 L80 275 L45 292 L55 264 L35 244 L65 244 Z" stroke={gold} strokeOpacity="0.95" strokeWidth="1.3" />
+      <circle cx="80" cy="260" r="12" stroke={gold} strokeOpacity="0.7" strokeWidth="1" />
+      <circle cx="80" cy="260" r="4.5" fill={glow} fillOpacity="1" />
       {rays(80, 260, 52, 6)}
       {ticks(80, 260, 52, 24, 6)}
 
-      {/* Rune row between mark II and III */}
-      <line x1="24" y1="334" x2="136" y2="334" stroke={amber} strokeOpacity="0.18" strokeWidth="0.5" />
-      <text x="80" y="348" textAnchor="middle" fill={amber} fillOpacity="0.45" fontSize="9" fontFamily="serif" letterSpacing="4">ᚷ ᛟ ᚾ</text>
+      {/* Rune row II→III */}
+      <line x1="24" y1="334" x2="136" y2="334" stroke={amber} strokeOpacity="0.5" strokeWidth="0.6" />
+      <text x="80" y="348" textAnchor="middle" fill={gold} fillOpacity="0.8" fontSize="9" fontFamily="serif" letterSpacing="4">ᚷ ᛟ ᚾ</text>
 
       {/* ── Mark III — Earth / Binding (bottom) ── */}
-      <circle cx="80" cy="415" r="46" stroke={amber} strokeOpacity="0.5" strokeWidth="1.3" />
-      <circle cx="80" cy="415" r="34" stroke={amber} strokeOpacity="0.2" strokeWidth="0.6" />
-      {/* Downward triangle — earth / water */}
-      <path d="M80 448 L110 395 L50 395 Z" stroke={gold} strokeOpacity="0.65" strokeWidth="1.1" />
-      {/* Horizontal crossbar (water mark) */}
-      <line x1="57" y1="415" x2="103" y2="415" stroke={gold} strokeOpacity="0.3" strokeWidth="0.7" />
-      <circle cx="80" cy="415" r="4" fill={glow} fillOpacity="0.85" />
+      <circle cx="80" cy="415" r="46" stroke={amber} strokeOpacity="0.85" strokeWidth="1.5" />
+      <circle cx="80" cy="415" r="34" stroke={amber} strokeOpacity="0.45" strokeWidth="0.8" />
+      <path d="M80 448 L110 395 L50 395 Z" stroke={gold} strokeOpacity="1" strokeWidth="1.4" />
+      <line x1="57" y1="415" x2="103" y2="415" stroke={gold} strokeOpacity="0.65" strokeWidth="0.9" />
+      <circle cx="80" cy="415" r="4" fill={glow} fillOpacity="1" />
       {ticks(80, 415, 46, 16, 4)}
 
       {/* Bottom corner bracket */}
-      <path d="M14 510 L14 492 L32 492" stroke={amber} strokeOpacity="0.55" strokeWidth="1.2" />
-      <path d="M146 510 L146 492 L128 492" stroke={amber} strokeOpacity="0.55" strokeWidth="1.2" />
+      <path d="M14 510 L14 492 L32 492" stroke={amber} strokeOpacity="0.9" strokeWidth="1.4" />
+      <path d="M146 510 L146 492 L128 492" stroke={amber} strokeOpacity="0.9" strokeWidth="1.4" />
 
-      {/* Scattered accent dots */}
-      <circle cx="28"  cy="200" r="1.8" fill={amber} fillOpacity="0.3" />
-      <circle cx="132" cy="200" r="1.8" fill={amber} fillOpacity="0.3" />
-      <circle cx="28"  cy="320" r="1.8" fill={amber} fillOpacity="0.3" />
-      <circle cx="132" cy="320" r="1.8" fill={amber} fillOpacity="0.3" />
-      <circle cx="28"  cy="460" r="1.5" fill={amber} fillOpacity="0.22" />
-      <circle cx="132" cy="460" r="1.5" fill={amber} fillOpacity="0.22" />
+      {/* Accent dots */}
+      <circle cx="28"  cy="200" r="1.8" fill={amber} fillOpacity="0.7" />
+      <circle cx="132" cy="200" r="1.8" fill={amber} fillOpacity="0.7" />
+      <circle cx="28"  cy="320" r="1.8" fill={amber} fillOpacity="0.7" />
+      <circle cx="132" cy="320" r="1.8" fill={amber} fillOpacity="0.7" />
+      <circle cx="28"  cy="460" r="1.5" fill={amber} fillOpacity="0.55" />
+      <circle cx="132" cy="460" r="1.5" fill={amber} fillOpacity="0.55" />
 
-      {/* Spine tick marks */}
+      {/* Spine ticks */}
       {Array.from({ length: 9 }, (_, i) => (
         <line key={i} x1="76" y1={52 + i * 52} x2="84" y2={52 + i * 52}
-          stroke={amber} strokeOpacity="0.15" strokeWidth="0.6" />
+          stroke={amber} strokeOpacity="0.45" strokeWidth="0.7" />
       ))}
     </svg>
   );
