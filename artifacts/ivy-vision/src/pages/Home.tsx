@@ -28,6 +28,8 @@ import artBelieve from "@assets/IMG_8637_1784966175027.jpeg";
 import artIntense from "@assets/IMG_8674_1784966175027.jpeg";
 import artHell from "@assets/IMG_8675_1784966175027.jpeg";
 import artSketch6 from "@assets/IMG_8676_1784966175027.jpeg";
+import infiniteCypherLogo from "@assets/infinite_cypher.png";
+import feralTendenciesLogo from "@assets/feral_tendencies.jpeg";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Palette, Mail } from 'lucide-react';
 
@@ -1666,6 +1668,60 @@ const DuskDivider = () => {
   );
 };
 
+const EVENTS = [
+  {
+    name: "Infinite Cypher",
+    logo: infiniteCypherLogo,
+    url: "https://infinitecypher.org",
+    logoStyle: "object-contain",
+  },
+  {
+    name: "Feral Tendencies",
+    logo: feralTendenciesLogo,
+    url: "https://feral-tendencies-showcase.replit.app/",
+    logoStyle: "object-cover",
+  },
+];
+
+const EventsSection = () => (
+  <section className="z-10 relative bg-background border-y border-white/5 py-24 overflow-hidden">
+    {/* Subtle ambient */}
+    <div className="absolute inset-0 pointer-events-none"
+      style={{ background: "radial-gradient(ellipse at 50% 60%, hsl(22 60% 8% / 0.6) 0%, transparent 70%)" }} />
+
+    <div className="max-w-5xl mx-auto px-6 md:px-12 w-full relative z-10">
+      <FadeIn className="text-center mb-16">
+        <h2 className="text-4xl md:text-6xl font-serif text-glow">Events</h2>
+      </FadeIn>
+
+      <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+        {EVENTS.map((event) => (
+          <FadeIn key={event.name}>
+            <a
+              href={event.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-4"
+              aria-label={event.name}
+            >
+              <div className="w-40 h-40 md:w-52 md:h-52 rounded-2xl overflow-hidden flex items-center justify-center bg-white/5 border border-white/10 transition-all duration-500 group-hover:border-primary/40 group-hover:shadow-[0_0_40px_rgba(180,120,60,0.25)] group-hover:scale-105">
+                <img
+                  src={event.logo}
+                  alt={event.name}
+                  className={`w-full h-full ${event.logoStyle} transition-all duration-500 group-hover:brightness-110`}
+                />
+              </div>
+              <span className="font-mono text-xs tracking-widest text-muted-foreground/50 uppercase group-hover:text-primary transition-colors duration-300">
+                {event.name}
+              </span>
+            </a>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 const FrequenciesSection = () => {
   const [active, setActive] = useState(0);
   const track = SPOTIFY_TRACKS[active];
@@ -2511,6 +2567,9 @@ export default function Home() {
 
       {/* Frequencies — real Spotify top tracks */}
       <FrequenciesSection />
+
+      {/* Events */}
+      <EventsSection />
 
       {/* The Relics — cinematic poetry scroll */}
       <PoetryScrollSection />
