@@ -2054,8 +2054,6 @@ const PoetryArchive = () => {
               })}
             </nav>
 
-            {/* Event logos — landscape/desktop only, one at a time with arrow nav */}
-            <EventLogos />
           </FadeIn>
 
           {/* Poem display */}
@@ -2116,6 +2114,11 @@ const PoetryArchive = () => {
               >
                 <FastForward className="w-4 h-4" />
               </button>
+            </div>
+
+            {/* Event logos — landscape/desktop only, sit in the blank space below poem text */}
+            <div className="hidden lg:block mt-12">
+              <EventLogos />
             </div>
           </motion.div>
         </div>
