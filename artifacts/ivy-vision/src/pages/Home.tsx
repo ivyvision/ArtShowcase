@@ -2125,10 +2125,10 @@ const PoetryArchive = () => {
 
 /* ── Poetry Scroll — one panel per photo ── */
 const PoetryPanel = ({
-  img, alt, align, lines, source, focal = "center", valign = "center", showEvents = false,
+  img, alt, align, lines, source, focal = "center", valign = "center",
 }: {
   img: string; alt: string; align: "left" | "center" | "right";
-  lines: string[]; source: string; focal?: string; valign?: "top" | "center" | "bottom"; showEvents?: boolean;
+  lines: string[]; source: string; focal?: string; valign?: "top" | "center" | "bottom";
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -2159,13 +2159,6 @@ const PoetryPanel = ({
       {/* Vignette edges */}
       <div className="absolute inset-0 pointer-events-none z-10"
         style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, hsl(22 55% 3% / 0.7) 100%)" }} />
-
-      {/* Event logos — right half, landscape/desktop only */}
-      {showEvents && (
-        <div className="hidden lg:flex absolute inset-0 z-20 items-end justify-end pb-16 pr-16">
-          <EventLogos />
-        </div>
-      )}
 
       {/* Poem text — centered over the image */}
       <motion.div
@@ -2268,7 +2261,7 @@ const PoetryScrollSection = () => (
       ]}
     />
     <PoetryPanel
-      img={aboveClouds} alt="Above the clouds"       align="left"   focal="center"  showEvents
+      img={aboveClouds} alt="Above the clouds"       align="left"   focal="center"
       source="Starlight · Estranged"
       lines={[
         "Held in place",
@@ -2622,6 +2615,9 @@ export default function Home() {
 
       {/* Frequencies — real Spotify top tracks */}
       <FrequenciesSection />
+
+      {/* Events */}
+      <EventsSection />
 
       {/* The Relics — cinematic poetry scroll */}
       <PoetryScrollSection />
