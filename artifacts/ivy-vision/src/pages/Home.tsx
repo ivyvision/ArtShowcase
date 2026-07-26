@@ -2656,51 +2656,39 @@ export default function Home() {
               {/* Shadow plate */}
               <div className="absolute inset-0 translate-x-3 translate-y-4 bg-black/70 pointer-events-none" />
 
-              {/* Composite: Clariel stormy-slate base + charter panels + portrait centred */}
-              <div className="relative w-full h-full bg-[hsl(218_35%_6%)] overflow-hidden border border-primary/25">
+              {/* Composite: wide sunset bg + portrait centred */}
+              <div className="relative w-full h-full bg-[hsl(22_55%_4%)] overflow-hidden border border-primary/25">
 
-                {/* ── Left Charter Panel ── */}
-                <div
-                  className="absolute left-0 top-0 h-full w-[30%] pointer-events-none z-10 p-[6%]"
-                  style={{
-                    maskImage: "linear-gradient(to right, black 55%, transparent 100%)",
-                    WebkitMaskImage: "linear-gradient(to right, black 55%, transparent 100%)",
-                  }}
-                >
-                  <CharterPanel />
-                </div>
+                {/* Wide desert background fills the full frame */}
+                <img
+                  src={oracleWideBg}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                />
 
-                {/* ── Right Charter Panel (mirror) ── */}
-                <div
-                  className="absolute right-0 top-0 h-full w-[30%] pointer-events-none z-10 p-[6%]"
-                  style={{
-                    maskImage: "linear-gradient(to left, black 55%, transparent 100%)",
-                    WebkitMaskImage: "linear-gradient(to left, black 55%, transparent 100%)",
-                  }}
-                >
-                  <CharterPanel flip />
-                </div>
+                {/* Symmetry fix — uniform warm amber wash over both sides equally */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[hsl(28_80%_18%/0.72)] via-transparent to-[hsl(28_80%_18%/0.72)] pointer-events-none" />
 
-                {/* Subtle ambient glow behind portrait */}
-                <div className="absolute inset-0 bg-radial-[ellipse_55%_80%_at_50%_50%] from-[hsl(28_60%_8%/0.6)] to-transparent pointer-events-none" />
+                {/* Warm grade over whole frame */}
+                <div className="absolute inset-0 bg-[hsl(28_60%_10%/0.35)] mix-blend-multiply pointer-events-none" />
 
                 {/* Original portrait — centred, feathered edges */}
                 <img
                   src={profileBg}
                   alt="Oracle — golden hour desert"
-                  className="absolute inset-0 w-full h-full object-contain z-5"
+                  className="absolute inset-0 w-full h-full object-contain"
                   style={{
                     objectPosition: "center",
-                    maskImage: "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%)",
-                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%)",
+                    maskImage: "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
+                    WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%)",
                   }}
                 />
 
                 {/* Cinematic sepia grade */}
-                <div className="absolute inset-0 bg-[hsl(28_60%_12%/0.25)] mix-blend-multiply pointer-events-none z-20" />
-                {/* Outer edge fades into page background */}
-                <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-background to-transparent pointer-events-none z-30" />
-                <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent pointer-events-none z-30" />
+                <div className="absolute inset-0 bg-[hsl(28_60%_12%/0.3)] mix-blend-multiply pointer-events-none" />
+                {/* Side fades so it melts into page */}
+                <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
                 {/* Bottom fade */}
                 <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
 
