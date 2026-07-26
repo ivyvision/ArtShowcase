@@ -28,7 +28,7 @@ import artBelieve from "@assets/IMG_8637_1784966175027.jpeg";
 import artIntense from "@assets/IMG_8674_1784966175027.jpeg";
 import artHell from "@assets/IMG_8675_1784966175027.jpeg";
 import artSketch6 from "@assets/IMG_8676_1784966175027.jpeg";
-import infiniteCypherLogo from "@assets/infinite_cypher_real.png";
+import infiniteCypherLogo from "@assets/infinite_cypher_original.jpeg";
 import feralTendenciesLogo from "@assets/feral_tendencies_real.png";
 
 import { Play, FastForward, Rewind, Disc3, Radio, ArrowRight, Instagram, Twitter, Youtube, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Palette, Mail } from 'lucide-react';
@@ -1715,68 +1715,11 @@ const EventsSection = () => {
             <img
               src={event.logo}
               alt={event.name}
-              className="w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(180,120,60,0.35)] group-hover:drop-shadow-[0_0_60px_rgba(180,120,60,0.65)] transition-all duration-500"
+              className="w-full h-auto object-contain transition-all duration-500"
+              style={isIC ? { mixBlendMode: "screen" } : {
+                filter: "drop-shadow(0 0 40px rgba(180,120,60,0.35))",
+              }}
             />
-
-            {/* Infinite Cypher elemental effects — positioned over logo */}
-            {isIC && (
-              <>
-                {/* Fire wisp — left element (~10% left, ~42% top) */}
-                {[0, 0.3, 0.6].map((delay, i) => (
-                  <div
-                    key={`fire-${i}`}
-                    className="absolute pointer-events-none"
-                    style={{
-                      left: `${10 + i * 1.5}%`,
-                      top: "30%",
-                      width: 14 - i * 3,
-                      height: 28 - i * 4,
-                      borderRadius: "50% 50% 30% 30%",
-                      background: `radial-gradient(ellipse at 50% 80%, #ff6a00, #ff3a00cc, transparent)`,
-                      animation: `fire-rise ${1.4 + i * 0.2}s ease-out ${delay}s infinite`,
-                      filter: "blur(2px)",
-                    }}
-                  />
-                ))}
-
-                {/* Water/lightning glow — right element (~82% left, ~35% top) */}
-                {[0, 0.4, 0.8].map((delay, i) => (
-                  <div
-                    key={`water-${i}`}
-                    className="absolute pointer-events-none"
-                    style={{
-                      left: `${80 + i}%`,
-                      top: "28%",
-                      width: 12 - i * 2,
-                      height: 24 - i * 3,
-                      borderRadius: "50%",
-                      background: `radial-gradient(ellipse at 50% 80%, #00cfff, #0080ffaa, transparent)`,
-                      animation: `water-pulse ${1.6 + i * 0.25}s ease-out ${delay}s infinite`,
-                      filter: "blur(3px)",
-                      boxShadow: "0 0 8px 4px #00cfff55",
-                    }}
-                  />
-                ))}
-
-                {/* Fog/mist — cloud element (~48% left, ~3% top) */}
-                {[0, 0.5, 1.0].map((delay, i) => (
-                  <div
-                    key={`fog-${i}`}
-                    className="absolute pointer-events-none"
-                    style={{
-                      left: `${42 + i * 4}%`,
-                      top: "0%",
-                      width: 28 + i * 6,
-                      height: 10,
-                      borderRadius: "50%",
-                      background: "radial-gradient(ellipse, rgba(220,220,255,0.55), transparent)",
-                      animation: `fog-drift ${2 + i * 0.3}s ease-out ${delay}s infinite`,
-                      filter: "blur(4px)",
-                    }}
-                  />
-                ))}
-              </>
-            )}
           </motion.a>
         </AnimatePresence>
 
