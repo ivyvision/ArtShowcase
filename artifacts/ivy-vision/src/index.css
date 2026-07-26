@@ -294,6 +294,24 @@
   animation: swirl 20s ease infinite;
 }
 
+/* ── Elemental rise animations for Infinite Cypher logo ── */
+@keyframes fire-rise {
+  0%   { transform: translateY(0) scaleX(1);   opacity: 0.9; }
+  40%  { transform: translateY(-22px) scaleX(0.7); opacity: 0.6; }
+  80%  { transform: translateY(-44px) scaleX(0.4); opacity: 0.2; }
+  100% { transform: translateY(-56px) scaleX(0.2); opacity: 0; }
+}
+@keyframes water-pulse {
+  0%   { transform: translateY(0) scale(1);    opacity: 0.85; }
+  50%  { transform: translateY(-18px) scale(0.75); opacity: 0.5; }
+  100% { transform: translateY(-36px) scale(0.4);  opacity: 0; }
+}
+@keyframes fog-drift {
+  0%   { transform: translateY(0) scaleX(1);    opacity: 0.6; }
+  60%  { transform: translateY(-20px) scaleX(1.4); opacity: 0.3; }
+  100% { transform: translateY(-38px) scaleX(1.8); opacity: 0; }
+}
+
 @keyframes noise {
   0%, 100% { transform: translate(0,    0); }
   10%       { transform: translate(-5%, -5%); }
