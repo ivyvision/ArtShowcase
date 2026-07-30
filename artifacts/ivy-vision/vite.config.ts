@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
 const port = 5173;
-const basePath = '/';
+const basePath = '';
 
 export default defineConfig({
   base: basePath,
